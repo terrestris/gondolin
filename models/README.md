@@ -1,0 +1,3 @@
+# models
+
+Sequelize model files

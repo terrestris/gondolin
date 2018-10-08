@@ -1,0 +1,23 @@
+{
+  "General": {
+    "yes": "Yes",
+    "no": "No",
+    "save": "Save",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "close": "Close",
+    "ok": "Ok",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "from": "From",
+    "until": "Until",
+    "search": "Search",
+    "import": "Import",
+    "edit": "Edit",
+    "loading": "Loading",
+    "error": "Error",
+    "warning": "Warning",
+    "title": "Title"
+  }
+}

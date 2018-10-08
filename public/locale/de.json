@@ -1,0 +1,23 @@
+{
+  "General": {
+    "yes": "Ja",
+    "no": "Nein",
+    "save": "Speichern",
+    "delete": "Löschen",
+    "cancel": "Abbrechen",
+    "close": "Schließen",
+    "ok": "Ok",
+    "login": "Anmelden",
+    "register": "Registrieren",
+    "logout": "Abmelden",
+    "from": "Von",
+    "until": "Bis",
+    "search": "Suchen",
+    "import": "Importieren",
+    "edit": "Bearbeiten",
+    "loading": "Lade",
+    "error": "Fehler",
+    "warning": "Achtung",
+    "title": "Titel"
+  }
+}

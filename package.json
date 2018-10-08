@@ -1,0 +1,53 @@
+{
+  "name": "gondolin-backend",
+  "version": "0.0.1",
+  "description": "The gondolin backend.",
+  "license": "BSD-2-Clause",
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.intranet.terrestris.de/terrestris/gondolin"
+  },
+  "keywords": [
+    "gondolin"
+  ],
+  "private": true,
+  "author": "terrestris GmbH & Co. KG",
+  "contributors": [
+    {
+      "name": "Kai Volland",
+      "email": "volland@terrestris.de",
+      "url": "https://github.com/kaivolland"
+    }
+  ],
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "lint-fix": "eslint --fix .",
+    "start": "node ./index.js",
+    "start:dev": "NODE_ENV=development npm start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "1.18.3",
+    "eslint": "5.6.1",
+    "eslint-plugin-node": "7.0.1",
+    "express": "4.16.3",
+    "express-ws": "4.0.0",
+    "jsonwebtoken": "8.3.0",
+    "lodash": "4.17.11",
+    "moment": "2.22.2",
+    "passport": "0.4.0",
+    "passport-jwt": "4.0.0",
+    "pg": "7.5.0",
+    "pg-native": "3.0.0",
+    "request": "2.88.0",
+    "request-promise-native": "1.0.5",
+    "sequelize": "4.39.0",
+    "sequelize-cli": "4.1.1",
+    "winston": "3.1.0"
+  },
+  "engines": {
+    "node": ">=8.3.0"
+  }
+}

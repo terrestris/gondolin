@@ -1,4 +1,5 @@
 # Logs
+log
 logs
 *.log
 npm-debug.log*
@@ -59,3 +60,9 @@ typings/
 
 # next.js build output
 .next
+
+#secret
+config/passport.js
+
+#postgresql
+postgresql_data
