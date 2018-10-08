@@ -52,20 +52,6 @@ module.exports = app => {
     }
   });
 
-  app.get('/:model/idmap', (req, res) => {
-    const modelName = req.params.model;
-    const options = optionsFromQueryParams(req.query);
-    generic.getIdMap(modelName, options)
-      .then(data => res.send({
-        success: true,
-        data
-      }))
-      .catch(error => res.send({
-        success: false,
-        error
-      }));
-  });
-
   app.get('/:model/get', (req, res) => {
     const modelName = req.params.model;
     const options = optionsFromQueryParams(req.query);
