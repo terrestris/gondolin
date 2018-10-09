@@ -24,10 +24,12 @@
     "lint": "eslint .",
     "lint-fix": "eslint --fix .",
     "start": "node ./index.js",
-    "start:dev": "NODE_ENV=development npm start",
+    "start:dev": "NODE_ENV=development node --require ts-node/register index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "@types/express": "^4.16.0",
+    "@types/node": "^10.11.5",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "1.18.3",
     "eslint": "5.6.1",
@@ -41,10 +43,14 @@
     "passport-jwt": "4.0.0",
     "pg": "7.5.0",
     "pg-native": "3.0.0",
+    "reflect-metadata": "^0.1.12",
     "request": "2.88.0",
     "request-promise-native": "1.0.5",
     "sequelize": "4.39.0",
     "sequelize-cli": "4.1.1",
+    "sequelize-typescript": "^1.0.0-alpha.4",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.1.1",
     "winston": "3.1.0"
   },
   "engines": {

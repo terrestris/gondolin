@@ -1,4 +1,4 @@
-const db = require('../sequelize.js');
+const db = require('../sequelize.ts');
 const logger = require('../config/logger');
 const _ = require('lodash');
 const {

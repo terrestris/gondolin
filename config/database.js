@@ -1,4 +1,4 @@
-const logger = require('./logger');
+// const logger = require('./logger');
 
 const config = {
   "development": {
@@ -10,7 +10,8 @@ const config = {
     "port": 5555,
     "protocol": "postgres",
     "schema": "gondolin",
-    "logging": logger.sequelize
+    // TODO Readd the logger config for the database
+    // "logging": logger.sequelize
   },
   "production": {
     "database": "gondolin",

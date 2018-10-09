@@ -3,7 +3,7 @@ const Generic = require('../service/Generic');
 const {
   jwtMiddleWare
 } = require('../service/Authentication');
-const db = require('../sequelize.js');
+const db = require('../sequelize.ts');
 const {
   models
 } = db;
