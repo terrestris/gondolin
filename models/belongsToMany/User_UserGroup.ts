@@ -4,11 +4,11 @@ import {
   ForeignKey,
   Column
 } from "sequelize-typescript";
-import { UserGroup } from "../UserGroup";
-import { User } from "../User";
+import UserGroup from "../UserGroup";
+import User from "../User";
 
 @Table
-export class User_UserGroup extends Model<User_UserGroup> {
+export default class User_UserGroup extends Model<User_UserGroup> {
 
   @ForeignKey(() => User)
   @Column

@@ -7,14 +7,14 @@ import {
     BelongsTo,
     BelongsToMany
 } from "sequelize-typescript";
-import { Role } from "./Role";
-import { EntityOperation } from "./EntityOperation";
-import { Role_EntityAccess } from "./belongsToMany/Role_EntityAccess";
+import Role from "./Role";
+import EntityOperation from "./EntityOperation";
+import Role_EntityAccess from "./belongsToMany/Role_EntityAccess";
 
 @Table({
   timestamps: true
 })
-export class EntityAccess extends Model<EntityAccess> {
+export default class EntityAccess extends Model<EntityAccess> {
 
   @AllowNull(false)
   @Column

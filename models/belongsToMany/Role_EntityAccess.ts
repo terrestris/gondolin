@@ -4,11 +4,11 @@ import {
   ForeignKey,
   Column
 } from "sequelize-typescript";
-import { Role } from "../Role";
-import { EntityAccess } from "../EntityAccess";
+import Role from "../Role";
+import EntityAccess from "../EntityAccess";
 
 @Table
-export class Role_EntityAccess extends Model<Role_EntityAccess> {
+export default class Role_EntityAccess extends Model<Role_EntityAccess> {
 
   @ForeignKey(() => Role)
   @Column

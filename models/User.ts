@@ -9,8 +9,8 @@ import {
     Scopes,
     BelongsToMany
 } from "sequelize-typescript";
-import { UserGroup } from "./UserGroup";
-import { User_UserGroup } from "./belongsToMany/User_UserGroup";
+import UserGroup from "./UserGroup";
+import User_UserGroup from "./belongsToMany/User_UserGroup";
 
 @DefaultScope({
   attributes: {
@@ -25,7 +25,7 @@ import { User_UserGroup } from "./belongsToMany/User_UserGroup";
 @Table({
   timestamps: true
 })
-export class User extends Model<User> {
+export default class User extends Model<User> {
 
   @Column(DataType.JSONB)
   clientConfig: any;

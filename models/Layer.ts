@@ -10,7 +10,7 @@ import {
 @Table({
   timestamps: true
 })
-export class Layer extends Model<Layer> {
+export default class Layer extends Model<Layer> {
 
   @Column(DataType.JSONB)
   clientConfig: any;

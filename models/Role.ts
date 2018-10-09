@@ -8,14 +8,14 @@ import {
     BelongsTo,
     ForeignKey
 } from "sequelize-typescript";
-import { User } from "./User";
-import { User_Role } from "./belongsToMany/User_Role";
-import { UserGroup } from "./UserGroup";
+import User from "./User";
+import User_Role from "./belongsToMany/User_Role";
+import UserGroup from "./UserGroup";
 
 @Table({
   timestamps: true
 })
-export class Role extends Model<Role> {
+export default class Role extends Model<Role> {
 
   @Unique
   @AllowNull(false)

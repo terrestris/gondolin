@@ -6,13 +6,13 @@ import {
     BelongsToMany,
     DataType
 } from "sequelize-typescript";
-import { Role } from "./Role";
-import { Role_ServiceAccess } from "./belongsToMany/Role_ServiceAccess";
+import Role from "./Role";
+import Role_ServiceAccess from "./belongsToMany/Role_ServiceAccess";
 
 @Table({
   timestamps: true
 })
-export class ServiceAccess extends Model<ServiceAccess> {
+export default class ServiceAccess extends Model<ServiceAccess> {
 
   @AllowNull(false)
   @Column(DataType.ENUM('REQUEST', 'RESPONSE'))

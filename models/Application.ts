@@ -11,7 +11,7 @@ import {
 @Table({
   timestamps: true
 })
-export class Application extends Model<Application> {
+export default class Application extends Model<Application> {
 
   @Column(DataType.JSONB)
   clientConfig: any;
@@ -21,7 +21,7 @@ export class Application extends Model<Application> {
 
   @Column(DataType.JSONB)
   layerConfig: any;
-  
+
   @Unique
   @AllowNull(false)
   @Column
@@ -30,7 +30,7 @@ export class Application extends Model<Application> {
   @Default(false)
   @Column
   stateOnly: boolean;
-  
+
   @Column(DataType.JSONB)
   toolConfig: any;
 }

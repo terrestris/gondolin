@@ -9,7 +9,7 @@ import {
 @Table({
   timestamps: true
 })
-export class EntityOperation extends Model<EntityOperation> {
+export default class EntityOperation extends Model<EntityOperation> {
 
   @AllowNull(false)
   @Column(DataType.ENUM('ADMIN', 'CREATE', 'READ', 'UPDATE', 'DELETE'))
