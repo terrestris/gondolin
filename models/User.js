@@ -2,14 +2,20 @@
 
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
-    username: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true
+    clientConfig: {
+      type: DataTypes.JSONB
+    },
+    details: {
+      type: DataTypes.JSONB
     },
     password: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true
     }
   }, {
     // If requested without scope, the password(hash) of a user will not be included
@@ -27,6 +33,12 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   });
+
+  User.associate = models => {
+    User.belongsToMany(models.UserGroup, {
+      through: 'User_UserGroup'
+    });
+  };
 
   return User;
 };
