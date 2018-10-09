@@ -1,17 +1,15 @@
-const Generic = require('../service/Generic');
+import Generic from '../service/Generic';
 
-const {
-  jwtMiddleWare
-} = require('../service/Authentication');
-const db = require('../sequelize.ts');
+import { jwtMiddleWare } from '../service/Authentication';
+import db from '../sequelize';
 const {
   models
 } = db;
 
 const generic = new Generic();
 
-const optionsFromQueryParams = (queryParams) => {
-  const options = {};
+const optionsFromQueryParams = queryParams => {
+  const options: any = {};
   const {
     include
   } = queryParams;
@@ -143,5 +141,5 @@ module.exports = app => {
         error
       }));
   });
-  
+
 }

@@ -1,10 +1,9 @@
-const jsonwebtoken = require('jsonwebtoken');
+import jsonwebtoken = require('jsonwebtoken');
 
-const logger = require('../config/logger');
-const { secretOrKey } = require('../config/passport');
-
-const Generic = require('./Generic');
-const EntityUploadService = require('./EntityUpload');
+import logger from '../config/logger';
+import { secretOrKey } from '../config/passport';
+import Generic from './Generic';
+import EntityUploadService from './EntityUpload';
 
 const generic = new Generic();
 const entityUpload = new EntityUploadService();
@@ -15,7 +14,9 @@ const entityUpload = new EntityUploadService();
  *
  * @class WebSocketService
  */
-class WebSocketService {
+export default class WebSocketService {
+
+  static socketStore: any = {};
 
   /**
    * Adds a socket to the WebSocketService.socketStore.
@@ -122,11 +123,3 @@ class WebSocketService {
   }
 }
 
-/**
- * Stores the WebSocket as a map with the username as key.
- */
-WebSocketService.socketStore = {
-
-};
-
-module.exports = WebSocketService;

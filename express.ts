@@ -1,9 +1,11 @@
-const express = require('express');
-const logger = require('./config/logger');
+import express = require('express');
+import path = require('path');
+import bodyParser = require('body-parser');
+
+import logger from './config/logger';
+
 const app = express();
 require('express-ws')(app);
-const path = require('path');
-const bodyParser = require('body-parser');
 const allowCrossDomain = (req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', '*');
@@ -28,11 +30,6 @@ require('./web/authentication')(app);
 // Websocket interfaces
 // *****************************
 require('./web/websocket')(app);
-
-// *****************************
-// STATIC FILES (tractor images)
-// *****************************
-const env = process.env.NODE_ENV;
 
 // serve locale files manually as express.static seems not to like preflight
 // requests

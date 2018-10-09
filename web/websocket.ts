@@ -1,6 +1,5 @@
-const logger = require('../config/logger');
-
-const WebSocket = require('../service/WebSocket');
+import  logger from '../config/logger';
+import  WebSocket from '../service/WebSocket';
 
 const websocketService = new WebSocket();
 

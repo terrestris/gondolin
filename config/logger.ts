@@ -68,4 +68,4 @@ if (environment !== 'production') {
   }));
 }
 
-module.exports = logger;
+export default logger;

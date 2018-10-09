@@ -1,6 +1,6 @@
-// const logger = require('./logger');
+// import logger from './logger';
 
-const config = {
+export default {
   "development": {
     "database": "gondolin",
     "username": "gondolin",
@@ -10,7 +10,7 @@ const config = {
     "port": 5555,
     "protocol": "postgres",
     "schema": "gondolin",
-    // TODO Readd the logger config for the database
+    // TODO Does currently not work... Fix it
     // "logging": logger.sequelize
   },
   "production": {
@@ -25,5 +25,3 @@ const config = {
     "logging": false
   }
 };
-
-module.exports = config;

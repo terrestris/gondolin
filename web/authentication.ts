@@ -1,7 +1,8 @@
-const {
+import
   AuthenticationService,
-  jwtMiddleWare
-} = require('../service/Authentication');
+  {
+    jwtMiddleWare
+  } from '../service/Authentication';
 
 module.exports = (app) => {
   const authenticationService = new AuthenticationService(app);
@@ -12,7 +13,6 @@ module.exports = (app) => {
    */
   app.get('/getUserByToken', jwtMiddleWare, (req, res) => {
     if (req.user) {
-      req.user.password = undefined;
       res.json({success: true, user: req.user});
     } else {
       res.json({success: false, message: `Couldn't get user by token.`});
