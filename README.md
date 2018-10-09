@@ -22,3 +22,16 @@ module.exports = {
   'secretOrKey': 'mellon'
 }
 ```
+
+2. Start the database and pgAdmin: `docker-compose --f docker-compose-dev.yml up`
+
+3. Run `npm install` and then `npm start` and gondolin will be available at `http://localhost:3000`.
+
+
+## Run via docker / docker-compose
+
+```
+docker build -t gondolin-server .
+
+docker-compose up
+```
