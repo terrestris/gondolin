@@ -1,9 +1,5 @@
 version: '3'
 services:
-  gondolin-server:
-    image: gondolin-server
-    ports:
-      - "3000:3000"
   gondolin-postgis:
     image: mdillon/postgis:10-alpine
     ports:
@@ -18,5 +14,5 @@ services:
     ports:
       - "5050:80"
     environment:
-      PGADMIN_DEFAULT_PASSWORD: admin 
+      PGADMIN_DEFAULT_PASSWORD: admin
       PGADMIN_DEFAULT_EMAIL: admin
