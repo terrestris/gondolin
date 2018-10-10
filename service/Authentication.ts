@@ -8,7 +8,7 @@ import User from '../models/User';
 const ExtractJwt = passportJWT.ExtractJwt;
 const JwtStrategy = passportJWT.Strategy;
 
-const { secretOrKey } = require('../config/passport');
+import secretOrKey from '../config/passport';
 
 const jwtOptions: any = {};
 jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();

@@ -1,6 +1,10 @@
-FROM node:8
+FROM node:8-alpine
 
-WORKDIR /usr/src/app
+RUN apk add --no-cache --virtual python2
+
+RUN apk add --no-cache dumb-init 
+
+WORKDIR /gondolin
 
 COPY package.json package.json
 
@@ -15,10 +19,11 @@ COPY public public
 COPY service service
 COPY util util
 COPY web web
-COPY index.js index.js
-COPY express.js express.js
-COPY sequelize.js sequelize.js
+COPY index.ts index.js
+COPY express.ts express.ts
+COPY sequelize.ts sequelize.ts
 
 ENV NODE_ENV production
 
-CMD ["node", "index.js"]
+ENTRYPOINT ["/usr/bin/dumb-init", "--"]
+CMD ["node", "index.ts"]

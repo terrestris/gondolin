@@ -20,8 +20,8 @@ secret for the passport authentification.
  * This file should not be pushed to public repositories as it contains the
  * jwt secret!
  */
-module.exports = {
-  'secretOrKey': 'mellon'
+export default {
+    secretOrKey: 'mellon'
 }
 ```
 
