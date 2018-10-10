@@ -21,7 +21,11 @@ const sequelize = new Sequelize({
 
 // Sync database schemas
 // Main
-sequelize.sync()
+
+sequelize.createSchema(config.schema, {})
+  .then(() => {
+    sequelize.sync();
+  })
   .then(() => {
     logger.info(`Database (schema ${config.schema}) synchronized.`);
   })
