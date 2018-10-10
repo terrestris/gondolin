@@ -1,23 +1,24 @@
-const logger = require('../config/logger');
-const passport = require('passport');
-const jwt = require('jsonwebtoken');
-const passportJWT = require("passport-jwt");
+import logger from '../config/logger';
+import passport = require('passport');
+import jwt = require('jsonwebtoken');
+import passportJWT = require("passport-jwt");
+import SecurityUtil from '../util/SecurityUtil';
+import User from '../models/User';
+
 const ExtractJwt = passportJWT.ExtractJwt;
 const JwtStrategy = passportJWT.Strategy;
-const SecurityUtil = require('../util/SecurityUtil');
-const {
-  models
-} = require('../sequelize');
+
 const { secretOrKey } = require('../config/passport');
 
-const jwtOptions = {}
+const jwtOptions: any = {};
 jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 jwtOptions.secretOrKey = secretOrKey;
 
-const jwtStrategy = new JwtStrategy(jwtOptions, (jwt_payload, next) => {
-  models.User.findOne({
+// TODO Move to seperate File
+export const jwtStrategy = new JwtStrategy(jwtOptions, (jwtPayload, next) => {
+  User.findOne({
     where: {
-      id: jwt_payload.id
+      id: jwtPayload.id
     }
   })
   .then(user => {
@@ -34,10 +35,10 @@ const jwtStrategy = new JwtStrategy(jwtOptions, (jwt_payload, next) => {
  *
  * @class AuthenticationService
  */
-class AuthenticationService {
+export default class AuthenticationService {
 
   /**
-   *Creates an instance of AuthenticationService.
+   * Creates an instance of AuthenticationService.
    *
    * @param {ExpressApp} app
    * @memberof AuthenticationService
@@ -63,17 +64,17 @@ class AuthenticationService {
   async login(inputName, inputPassword) {
     logger.info('User is trying to login.');
 
-    return models.User.scope('withPassword').findOne({
+    return User.scope('withPassword').findOne({
       where: {
         username: inputName
       }
     })
       .then((user) => {
-        if(!user){
+        if (!user) {
           logger.info('Login failed. No such user.');
           return {
             success: false,
-            message:"No such user."
+            message: "No such user."
           };
         }
 
@@ -83,7 +84,7 @@ class AuthenticationService {
           password
         } = user;
 
-        if(SecurityUtil.comparePassword(inputPassword, password)) {
+        if (SecurityUtil.comparePassword(inputPassword, password)) {
           logger.info('User logged in.');
 
           const payload = {
@@ -123,24 +124,19 @@ class AuthenticationService {
   async register(userData) {
     const {
       username,
-      password,
-      ...managerData
+      password
     } = userData;
 
     logger.debug(`Registering user ${username}.`);
 
     const hashedPassword = SecurityUtil.generateHash(password);
 
-    return models.User.create({
+    return User.create({
         username,
-        password: hashedPassword,
-        Manager: managerData
-      }, {
-        include: models.Manager
+        password: hashedPassword
       })
-        .then(user => {
-          if(user) {
-            user.password = undefined;
+        .then((user: User) => {
+          if (user) {
             return {
               success: true,
               message: "Registration completed.",
@@ -169,11 +165,6 @@ class AuthenticationService {
  * @param {*} res
  * @param {*} next
  */
-const jwtMiddleWare = passport.authenticate('jwt', {
+export const jwtMiddleWare = passport.authenticate('jwt', {
   session: false
 });
-
-module.exports ={
-  jwtMiddleWare,
-  AuthenticationService
-};

@@ -62,7 +62,7 @@ typings/
 .next
 
 #secret
-config/passport.js
+config/passport.ts
 
 #postgresql
 postgresql_data

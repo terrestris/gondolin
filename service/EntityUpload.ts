@@ -1,4 +1,4 @@
-const Generic = require('./Generic.js');
+import Generic from './Generic';
 const generic = new Generic();
 
 const CurrentEntityUploads = {};
@@ -9,7 +9,7 @@ const CurrentEntityUploads = {};
  *
  * @class EntityUploadService
  */
-class EntityUploadService {
+export default class EntityUploadService {
 
   /**
    * Creates a new import config.
@@ -20,7 +20,7 @@ class EntityUploadService {
     CurrentEntityUploads[user] = {
       modelName,
       data: []
-    }
+    };
   }
 
   /**
@@ -59,5 +59,3 @@ class EntityUploadService {
   }
 
 }
-
-module.exports = EntityUploadService;

@@ -1,0 +1,27 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "noUnusedLocals": true,
+    "sourceMap": true,
+    "declaration": false,
+    "pretty": true,
+    "strictNullChecks": true
+  },
+  "include": [
+      "models",
+      "service",
+      "util",
+      "web",
+      "sequelize.ts",
+      "express.ts",
+      "index.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

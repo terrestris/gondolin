@@ -1,20 +1,32 @@
-const db = require('../sequelize.js');
-const logger = require('../config/logger');
-const _ = require('lodash');
-const {
-  models,
-  sequelizeMain
-} = db;
+import _ = require('lodash');
 
-class Generic {
+import logger from '../config/logger';
+import sequelize from '../sequelize';
+import User from '../models/User';
+import Role from '../models/Role';
+import Layer from '../models/Layer';
+import UserGroup from '../models/UserGroup';
+import Application from '../models/Application';
+
+type queryableModel = 'Application' | 'User' | 'UserGroup' | 'Layer' | 'Role';
+
+const models: any = {
+  Application,
+  User,
+  UserGroup,
+  Layer,
+  Role
+};
+
+export default class Generic {
 
   /**
    * Get a description of the attributes and associations of a given model.
    *
-   * @param {*} modelName  The model to get the description for.
+   * @param {queryableModel} modelName  The model to get the description for.
    * @return {Object} Object containing attributes and assocations of the model.
    */
-  getModelDescription(modelName) {
+  getModelDescription(modelName: queryableModel) {
     logger.debug(`Getting model description for ${modelName}.`);
     if (modelName) {
 
@@ -60,15 +72,15 @@ class Generic {
    * @return {Object} Object containing the attributes of the geometry column.
    *
    */
-  getGeometryDescription(modelName) {
+  getGeometryDescription(modelName: queryableModel) {
     logger.debug(`Getting geometry description for ${modelName}.`);
     if (modelName) {
-      return sequelizeMain
+      return sequelize
         .query('SELECT * ' +
           'FROM geometry_columns ' +
           'WHERE f_geometry_column = \'geom\' ' +
           'AND f_table_name = :table_name', {
-          type: sequelizeMain.QueryTypes.SELECT,
+          type: sequelize.QueryTypes.SELECT,
           replacements: {
             table_name: modelName + 's'
           }
@@ -88,7 +100,7 @@ class Generic {
    * @param {Object} opt Options to be passed to the findById method of sequelize.
    * @return {Promise} Promise resolving with the found entity of the given modelName.
    */
-  getEntityById(modelName, id, opt) {
+  getEntityById(modelName: queryableModel, id: number, opt?) {
     logger.debug(`Getting ${modelName} with id ${id}.`);
     if (modelName) {
       return models[modelName]
@@ -107,7 +119,7 @@ class Generic {
    * @param {Object} opt Options to be passed to the findAll method of sequelize.
    * @return {Promise} Promise resolving with all entities of the given modelName.
    */
-  getAllEntities(modelName, opt) {
+  getAllEntities(modelName: queryableModel, opt) {
     logger.debug(`Getting all entities of ${modelName}.`);
     if (modelName) {
       return models[modelName]
@@ -119,16 +131,16 @@ class Generic {
     }
   }
 
-  /**
-   * Creates an entity of a given model.
-   *
+  /*modelName
+   *modelName model.
+   *modelName
    * @param {String} modelName The name of the model of the entity that should
    *  be created.
    * @param {Object[]} data An object that should be created.
    * @return {Promise} Promise resolving with an objects containing the created
    * entity data.
    */
-  createEntity(modelName, data) {
+  createEntity(modelName: queryableModel, data) {
     logger.debug(`Creating ${modelName}.`);
     return models[modelName]
       .create(data)
@@ -148,7 +160,7 @@ class Generic {
    * @return {Promise} Promise resolving with an array of objects of the created
    * entities.
    */
-  createEntities(modelName, data, user) {
+  createEntities(modelName: queryableModel, data, user) {
     logger.debug(`Creating ${data.length} ${modelName}s.`);
 
     const associations = models[modelName].associations;
@@ -163,7 +175,7 @@ class Generic {
     // The model contains belongsToManyAssociations. Bulk creation is not
     // supported for these models so we have to create them one by one.
     if (Object.keys(belongsToManyAssociations).length > 0) {
-      return sequelizeMain.transaction((t) => {
+      return sequelize.transaction((t) => {
         const promises = data.map(tupel => {
           return models[modelName]
             .create(tupel, {
@@ -183,7 +195,7 @@ class Generic {
                     });
                   }
                 });
-              return sequelizeMain.Promise.all(updatePromises);
+              return sequelize.Promise.all(updatePromises);
             })
             .catch(error => {
               logger.error(`Could not create entities of ${modelName}: ${error}`);
@@ -191,7 +203,7 @@ class Generic {
             });
         });
 
-        return sequelizeMain.Promise.all(promises);
+        return sequelize.Promise.all(promises);
       });
     } else {
       // Bulk create instances
@@ -214,7 +226,7 @@ class Generic {
    * @return {Promise} Promise resolving with an array of objects of the updated
    * entities.
    */
-  updateEntities(modelName, data) {
+  updateEntities(modelName: queryableModel, data) {
     logger.debug(`Updating ${data.length} ${modelName}s.`);
 
     const associations = models[modelName].associations;
@@ -226,33 +238,31 @@ class Generic {
       }
     });
 
-    let promises = [];
-    data.forEach((newdata) => {
+    const promises = data.map(newdata => {
       const id = newdata.id;
       delete newdata.id;
-      promises.push(
-        models[modelName]
-          .findById(id).then((row) => {
-            // Update belongsToMany Associations
-            Object.keys(belongsToManyAssociations).forEach((associationKey) => {
-              const association = associations[associationKey];
-              const key = association.as;
-              const value = newdata[key];
-              const associationSetter = association.accessors.set;
-              if (value) {
-                row[associationSetter](value);
-                delete newdata[key];
-              }
-            });
-            return row.update(newdata);
-          })
-          .catch(error => {
-            logger.error(`Could not update entities of ${modelName}: ${error}`);
-          })
-      );
+      return models[modelName]
+        .findById(id)
+        .then(row => {
+          // Update belongsToMany Associations
+          Object.keys(belongsToManyAssociations).forEach((associationKey) => {
+            const association = associations[associationKey];
+            const key = association.as;
+            const value = newdata[key];
+            const associationSetter = association.accessors.set;
+            if (value) {
+              row[associationSetter](value);
+
+            }
+          });
+          return row.update(newdata);
+        })
+        .catch(error => {
+          logger.error(`Could not update entities of ${modelName}: ${error}`);
+        });
     });
 
-    return sequelizeMain.Promise.all(promises);
+    return sequelize.Promise.all(promises);
   }
 
   /**
@@ -263,7 +273,7 @@ class Generic {
    * @param {ID[]} ids An array of ids of entities that should be deleted.
    * @return {Promise} A Promise resolving with the number of affected rows.
    */
-  deleteEntities(modelName, ids) {
+  deleteEntities(modelName: queryableModel, ids) {
     logger.debug(`Deleting ${modelName}s with ids ${ids}.`);
     return models[modelName]
       .destroy({
@@ -282,7 +292,7 @@ class Generic {
    * @param {String} modelName
    * @param {Object} options
    */
-  countEntities(modelName, options = {}) {
+  countEntities(modelName: queryableModel, options = {}) {
     logger.debug(`Counting entities of ${modelName}.`);
     return models[modelName]
       .count(options)
@@ -291,5 +301,3 @@ class Generic {
       });
   }
 }
-
-module.exports = Generic;

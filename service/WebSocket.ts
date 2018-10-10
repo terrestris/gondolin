@@ -1,10 +1,9 @@
-const jsonwebtoken = require('jsonwebtoken');
+import jsonwebtoken = require('jsonwebtoken');
 
-const logger = require('../config/logger');
-const { secretOrKey } = require('../config/passport');
-
-const Generic = require('./Generic');
-const EntityUploadService = require('./EntityUpload');
+import logger from '../config/logger';
+import { secretOrKey } from '../config/passport';
+import Generic from './Generic';
+import EntityUploadService from './EntityUpload';
 
 const generic = new Generic();
 const entityUpload = new EntityUploadService();
@@ -15,7 +14,9 @@ const entityUpload = new EntityUploadService();
  *
  * @class WebSocketService
  */
-class WebSocketService {
+export default class WebSocketService {
+
+  static socketStore: any = {};
 
   /**
    * Adds a socket to the WebSocketService.socketStore.
@@ -75,7 +76,7 @@ class WebSocketService {
         const message = 'Could not read jwt from websocket message. Make sure to add the jwt to the json data';
         logger.warn(message);
         ws.send(JSON.stringify({
-          message: message,
+          message,
           type: 'error'
         }));
         reject(message);
@@ -103,7 +104,7 @@ class WebSocketService {
             noPopup: true
           }));
         } catch (error) {
-          logger.error(`Can not establish WebSocket: ${error}.`)
+          logger.error(`Can not establish WebSocket: ${error}.`);
         }
         break;
       // starts a new entity import
@@ -122,11 +123,3 @@ class WebSocketService {
   }
 }
 
-/**
- * Stores the WebSocket as a map with the username as key.
- */
-WebSocketService.socketStore = {
-
-};
-
-module.exports = WebSocketService;

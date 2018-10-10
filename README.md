@@ -1,6 +1,6 @@
 # gondolin
 
-System requirments: 
+System requirments:
 
 - docker
 - docker-compose
@@ -10,7 +10,7 @@ System requirments:
 
 Setup:
 
-1. Create a `passport.js` in the config folder. The file contains the
+1. Create a `passport.ts` in the config folder. The file contains the
 secret for the passport authentification.
 
 ```
