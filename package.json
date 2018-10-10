@@ -23,7 +23,7 @@
   "scripts": {
     "lint": "tslint -p tsconfig.json",
     "lint:fix": "tslint -p tsconfig.json --fix",
-    "start": "node ./index.js",
+    "start": " node --require ts-node/register index.ts",
     "start:dev": "NODE_ENV=development node --require ts-node/register index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
