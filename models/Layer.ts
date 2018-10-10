@@ -29,5 +29,5 @@ export default class Layer extends Model<Layer> {
 
   @AllowNull(false)
   @Column(DataType.ENUM('TileWMS', 'VectorTile', 'WFS', 'WMS', 'WMTS', 'XYZ'))
-  type: 'TileWMS' | 'VectorTile'| 'WFS' | 'WMS' | 'WMTS' | 'XYZ'
+  type: 'TileWMS' | 'VectorTile' | 'WFS' | 'WMS' | 'WMTS' | 'XYZ';
 }

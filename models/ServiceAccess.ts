@@ -16,19 +16,19 @@ export default class ServiceAccess extends Model<ServiceAccess> {
 
   @AllowNull(false)
   @Column(DataType.ENUM('REQUEST', 'RESPONSE'))
-  event: 'REQUEST' | 'RESPONSE'
+  event: 'REQUEST' | 'RESPONSE';
 
   @AllowNull(false)
   @Column
-  operation: string
+  operation: string;
 
   @AllowNull(false)
   @Column(DataType.ENUM('WMS', 'WFS', 'WCS'))
-  service: 'WMS' | 'WFS' | 'WCS'
+  service: 'WMS' | 'WFS' | 'WCS';
 
   @AllowNull(false)
   @Column(DataType.ENUM('ALLOW', 'DENY', 'MODIFY'))
-  type: 'ALLOW' | 'DENY'| 'MODIFY'
+  type: 'ALLOW' | 'DENY' | 'MODIFY';
 
   @BelongsToMany(() => Role, () => Role_ServiceAccess)
   roles: Role[];

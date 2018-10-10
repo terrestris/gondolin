@@ -23,7 +23,7 @@ export default class Generic {
   /**
    * Get a description of the attributes and associations of a given model.
    *
-   * @param {*} modelName  The model to get the description for.
+   * @param {queryableModel} modelName  The model to get the description for.
    * @return {Object} Object containing attributes and assocations of the model.
    */
   getModelDescription(modelName: queryableModel) {
@@ -99,7 +99,7 @@ export default class Generic {
    * @param {Number} id The id to find the entity of.
    * @param {Object} opt Options to be passed to the findById method of sequelize.
    * @return {Promise} Promise resolving with the found entity of the given modelName.
-   */modelName
+   */
   getEntityById(modelName: queryableModel, id: number, opt?) {
     logger.debug(`Getting ${modelName} with id ${id}.`);
     if (modelName) {
@@ -252,14 +252,14 @@ export default class Generic {
             const associationSetter = association.accessors.set;
             if (value) {
               row[associationSetter](value);
-              delete newdata[key];
+
             }
           });
           return row.update(newdata);
         })
         .catch(error => {
           logger.error(`Could not update entities of ${modelName}: ${error}`);
-        })
+        });
     });
 
     return sequelize.Promise.all(promises);

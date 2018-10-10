@@ -1,5 +1,4 @@
-import
-  AuthenticationService,
+import AuthenticationService,
   {
     jwtMiddleWare
   } from '../service/Authentication';
@@ -30,7 +29,7 @@ module.exports = (app) => {
 
     try {
       const loginResponse = await authenticationService.login(name, password);
-      let status = loginResponse.success ? 200 : 401;
+      const status = loginResponse.success ? 200 : 401;
       res.status(status).json(loginResponse);
     } catch (error) {
       res.status(500).json({success: false, message: error});
@@ -43,10 +42,10 @@ module.exports = (app) => {
   app.post('/register', async (req, res) => {
     try {
       const registerResponse = await authenticationService.register(req.body);
-      let status = registerResponse.success ? 200 : 401;
+      const status = registerResponse.success ? 200 : 401;
       res.status(status).json(registerResponse);
     } catch (error) {
       res.status(500).json({success: false, message: error});
     }
   });
-}
+};

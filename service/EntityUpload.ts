@@ -20,7 +20,7 @@ export default class EntityUploadService {
     CurrentEntityUploads[user] = {
       modelName,
       data: []
-    }
+    };
   }
 
   /**

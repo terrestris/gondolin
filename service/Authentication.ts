@@ -10,15 +10,15 @@ const JwtStrategy = passportJWT.Strategy;
 
 const { secretOrKey } = require('../config/passport');
 
-const jwtOptions: any = {}
+const jwtOptions: any = {};
 jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 jwtOptions.secretOrKey = secretOrKey;
 
 // TODO Move to seperate File
-export const jwtStrategy = new JwtStrategy(jwtOptions, (jwt_payload, next) => {
+export const jwtStrategy = new JwtStrategy(jwtOptions, (jwtPayload, next) => {
   User.findOne({
     where: {
-      id: jwt_payload.id
+      id: jwtPayload.id
     }
   })
   .then(user => {
@@ -38,7 +38,7 @@ export const jwtStrategy = new JwtStrategy(jwtOptions, (jwt_payload, next) => {
 export default class AuthenticationService {
 
   /**
-   *Creates an instance of AuthenticationService.
+   * Creates an instance of AuthenticationService.
    *
    * @param {ExpressApp} app
    * @memberof AuthenticationService
@@ -70,11 +70,11 @@ export default class AuthenticationService {
       }
     })
       .then((user) => {
-        if(!user){
+        if (!user) {
           logger.info('Login failed. No such user.');
           return {
             success: false,
-            message:"No such user."
+            message: "No such user."
           };
         }
 
@@ -84,7 +84,7 @@ export default class AuthenticationService {
           password
         } = user;
 
-        if(SecurityUtil.comparePassword(inputPassword, password)) {
+        if (SecurityUtil.comparePassword(inputPassword, password)) {
           logger.info('User logged in.');
 
           const payload = {
@@ -136,7 +136,7 @@ export default class AuthenticationService {
         password: hashedPassword
       })
         .then((user: User) => {
-          if(user) {
+          if (user) {
             return {
               success: true,
               message: "Registration completed.",

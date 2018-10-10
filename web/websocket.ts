@@ -1,5 +1,5 @@
-import  logger from '../config/logger';
-import  WebSocket from '../service/WebSocket';
+import logger from '../config/logger';
+import WebSocket from '../service/WebSocket';
 
 const websocketService = new WebSocket();
 
@@ -13,7 +13,7 @@ module.exports = app => {
         .then(user => {
           if (user) {
             try {
-              websocketService.readMessage(JSON.parse(msg), user, ws)
+              websocketService.readMessage(JSON.parse(msg), user, ws);
             } catch (error) {
               logger.error(`Error reading WebSocket message ${msg}: ${error}.`);
             }
@@ -21,7 +21,7 @@ module.exports = app => {
             const message = 'Couldn\'t get user from request. Make sure to add the jwt to the request.';
             logger.warn(message);
             ws.send(JSON.stringify({
-              message: message,
+              message,
               type: 'error'
             }));
           }
@@ -30,10 +30,10 @@ module.exports = app => {
           const message = `Error establishing WebSocket: ${error}.`;
           logger.error(message);
           ws.send(JSON.stringify({
-            message: message,
+            message,
             type: 'error'
           }));
         });
     });
   });
-}
+};

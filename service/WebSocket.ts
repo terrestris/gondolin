@@ -76,7 +76,7 @@ export default class WebSocketService {
         const message = 'Could not read jwt from websocket message. Make sure to add the jwt to the json data';
         logger.warn(message);
         ws.send(JSON.stringify({
-          message: message,
+          message,
           type: 'error'
         }));
         reject(message);
@@ -104,7 +104,7 @@ export default class WebSocketService {
             noPopup: true
           }));
         } catch (error) {
-          logger.error(`Can not establish WebSocket: ${error}.`)
+          logger.error(`Can not establish WebSocket: ${error}.`);
         }
         break;
       // starts a new entity import

@@ -21,12 +21,12 @@ const optionsFromQueryParams = queryParams => {
       options.include = includeModels.map(model => {
         return {
           model: models[model]
-        }
+        };
       });
     }
   }
   return options;
-}
+};
 
 module.exports = app => {
 
@@ -81,15 +81,17 @@ module.exports = app => {
 
   app.post('/:model/create', jwtMiddleWare, (req, res) => {
     const modelName = req.params.model;
-    const data = req.body;
-    const user = req.user;
+    const {
+      user,
+      body: requestData
+    } = req;
     if (!user) {
       res.status(403).json({
         success: false,
         message: 'Couldn\'t get user from request.'
       });
     }
-    generic.createEntities(modelName, data, user)
+    generic.createEntities(modelName, requestData, user)
       .then(data => res.send({
         success: true,
         data
@@ -102,15 +104,17 @@ module.exports = app => {
 
   app.post('/:model/update', jwtMiddleWare, (req, res) => {
     const modelName = req.params.model;
-    const data = req.body;
-    const user = req.user;
+    const {
+      user,
+      body: requestData
+    } = req;
     if (!user) {
       res.status(403).json({
         success: false,
         message: 'Couldn\'t get user from request.'
       });
     }
-    generic.updateEntities(modelName, data)
+    generic.updateEntities(modelName, requestData)
       .then(data => res.send({
         success: true,
         data
@@ -123,15 +127,17 @@ module.exports = app => {
 
   app.post('/:model/delete', jwtMiddleWare, (req, res) => {
     const modelName = req.params.model;
-    const data = req.body;
-    const user = req.user;
+    const {
+      user,
+      body: requestData
+    } = req;
     if (!user) {
       res.status(403).json({
         success: false,
         message: 'Couldn\'t get user from request.'
       });
     }
-    generic.deleteEntities(modelName, data)
+    generic.deleteEntities(modelName, requestData)
       .then(data => res.send({
         success: true,
         data
@@ -142,4 +148,4 @@ module.exports = app => {
       }));
   });
 
-}
+};
