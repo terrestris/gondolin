@@ -1,7 +1,7 @@
 import jsonwebtoken = require('jsonwebtoken');
 
 import logger from '../config/logger';
-import { secretOrKey } from '../config/passport';
+import secretOrKey from '../config/passport';
 import Generic from './Generic';
 import EntityUploadService from './EntityUpload';
 
