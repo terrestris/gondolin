@@ -7,7 +7,7 @@ services:
   gondolin-postgis:
     image: mdillon/postgis:10-alpine
     ports:
-      - "5555:5432"
+      - "5432:5432"
     environment:
       POSTGRES_USER: gondolin
       POSTGRES_PASSWORD: gondolin
