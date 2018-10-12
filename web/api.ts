@@ -66,6 +66,26 @@ module.exports = (app: Application) => {
     }
   });
 
+  app.get('/:model/idmap', (req, res) => {
+    const modelName = req.params.model;
+    const options = optionsFromQueryParams(req.query);
+    generic.getIdMap(modelName, options)
+      .then(data => {
+        const response: GondolinResponse = {
+          success: true,
+          data
+        };
+        res.send(response);
+      })
+      .catch(error => {
+        const response: GondolinResponse = {
+          success: false,
+          error
+        };
+        res.send(response);
+      });
+  });
+
   app.get('/:model/get', (req: Request, res: Response) => {
     const modelName: string = req.params.model;
     const options = optionsFromQueryParams(req.query);

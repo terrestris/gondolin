@@ -20,14 +20,6 @@
     "warning": "Achtung",
     "title": "Titel"
   },
-  "ApplicationHeader": {
-    "login": "Anmelden",
-    "register": "Registrieren",
-    "management": "Management",
-    "analysis": "Analyse",
-    "map": "Karte",
-    "logout": "Abmelden"
-  },
   "LandingPage": {
     "welcome": "Willkommen"
   },
@@ -36,6 +28,12 @@
   },
   "RegistrationPage": {
     "registration": "Registrierung"
+  },
+  "ApplicationHeader": {
+    "login": "Anmelden",
+    "register": "Registrieren",
+    "logout": "{{user}} abmelden",
+    "management": "Verwaltung"
   },
   "LoginForm": {
     "name": "Name",

@@ -23,10 +23,8 @@
   "ApplicationHeader": {
     "login": "Login",
     "register": "Register",
-    "management": "Management",
-    "analysis": "Analysis",
-    "map": "Map",
-    "logout": "Logout"
+    "logout": "Logout {{user}}",
+    "management": "Management"
   },
   "LoginForm": {
     "name": "Name",

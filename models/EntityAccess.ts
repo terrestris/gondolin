@@ -29,5 +29,5 @@ export default class EntityAccess extends Model<EntityAccess> {
   entityOperation: EntityOperation;
 
   @BelongsToMany(() => Role, () => Role_EntityAccess)
-  roles: Role[];
+  Roles: Role[];
 }

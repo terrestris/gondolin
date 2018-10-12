@@ -43,5 +43,5 @@ export default class User extends Model<User> {
   username: string;
 
   @BelongsToMany(() => UserGroup, () => User_UserGroup)
-  usergroups: UserGroup[];
+  UserGroups: UserGroup[];
 }

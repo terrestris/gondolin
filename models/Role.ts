@@ -31,5 +31,5 @@ export default class Role extends Model<Role> {
   userGroup: UserGroup;
 
   @BelongsToMany(() => User, () => User_Role)
-  roles: Role[];
+  Roles: Role[];
 }

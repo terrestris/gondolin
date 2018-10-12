@@ -8,6 +8,7 @@ import Layer from '../models/Layer';
 import UserGroup from '../models/UserGroup';
 import Application from '../models/Application';
 import { QueryOptions } from 'sequelize-typescript';
+const associationMapping = require('../config/pKeyAssociations.json');
 
 import {
   Model
@@ -93,6 +94,41 @@ export default class Generic {
           throw error;
         });
     }
+  }
+
+    /**
+   * Creates an object to map a given id of an entity to a specific column.
+   *
+   * These id maps are (among others) used for the CSV import so you can e.g.
+   * identify a Plot by its name and not by its (mostly unkonwn and dynamic)
+   * database id.
+   *
+   * The associated column is defined by "associationMapping" from a config file.
+   *
+   * @param {String} modelName The model to create the id map for.
+   * @param {Object} opt Options to be passed to the findAll method of sequelize.
+   * @return {Object} The idMap mapping database id (key) with the
+   *  associationColumn.
+   */
+  getIdMap(modelName, opt) {
+    logger.debug(`Creating a id map for ${modelName}`);
+    const associationColumn = associationMapping[modelName];
+    const options = Object.assign({
+      attributes: ['id', associationColumn]
+    }, opt);
+    return models[modelName]
+      .findAll(options || {})
+      .then((entities) => {
+        const idMap = {};
+        entities.forEach((entity) => {
+          idMap[entity.id] = entity[associationColumn];
+        });
+        return idMap;
+      })
+      .catch(error => {
+        logger.error(`Could not get idMap of ${modelName}: ${error}`);
+        throw error;
+      });
   }
 
   /**
