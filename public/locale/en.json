@@ -22,7 +22,11 @@
   },
   "ApplicationHeader": {
     "login": "Login",
-    "register": "Register"
+    "register": "Register",
+    "management": "Management",
+    "analysis": "Analysis",
+    "map": "Map",
+    "logout": "Logout"
   },
   "LoginForm": {
     "name": "Name",
