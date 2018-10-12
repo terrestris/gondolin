@@ -19,5 +19,43 @@
     "error": "Error",
     "warning": "Warning",
     "title": "Title"
+  },
+  "LoginForm": {
+    "name": "Name",
+    "username": "Username",
+    "password": "Password",
+    "failed": "Login failed",
+    "bytokenfailed": "Get User By Token Failed"
+  },
+  "RegistrationForm": {
+    "failed": "Registration failed",
+    "success": "Registration for user {{user}} successful. You can know login.",
+    "title": "Title",
+    "givenname": "Given name",
+    "familyname": "Family name",
+    "username": "Username",
+    "email": "email",
+    "password": "Password",
+    "confirmpassword": "Confirm password",
+    "mobile": "Mobile",
+    "landline": "Landline",
+    "fax": "Fax",
+    "street": "Street",
+    "housenumber": "House number",
+    "zipcode": "Zipcode",
+    "city": "City",
+    "register": "Register"
+  },
+  "LandingPage": {
+    "welcome": "Welcome"
+  },
+  "LoginPage": {
+    "login": "Login"
+  },
+  "RegistrationPage": {
+    "registration": "Registration"
+  },
+  "EventLog": {
+    "eventLog": "Event log"
   }
 }

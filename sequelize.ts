@@ -1,5 +1,5 @@
 'use strict';
-import {Sequelize} from 'sequelize-typescript';
+import { Sequelize } from 'sequelize-typescript';
 import dataBaseConfig from './config/database';
 import logger from './config/logger';
 
@@ -29,7 +29,7 @@ sequelize.createSchema(config.schema, {})
   .then(() => {
     logger.info(`Database (schema ${config.schema}) synchronized.`);
   })
-  .catch((err) => {
+  .catch((err: Error) => {
     logger.error(`Database (schema ${config.schema}) synchronization failed: ${err}`);
   });
 

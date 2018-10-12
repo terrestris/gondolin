@@ -3,14 +3,18 @@ import AuthenticationService,
     jwtMiddleWare
   } from '../service/Authentication';
 
-module.exports = (app) => {
+import {
+  Application
+} from 'express';
+
+module.exports = (app: Application) => {
   const authenticationService = new AuthenticationService(app);
 
   /**
    * Webinterface to get the User by its token. The token needs to be in the
    * Authentication as "Bearer [token]".
    */
-  app.get('/getUserByToken', jwtMiddleWare, (req, res) => {
+  app.get('/getUserByToken', jwtMiddleWare, async (req, res) => {
     if (req.user) {
       res.json({success: true, user: req.user});
     } else {

@@ -1,5 +1,16 @@
 import Generic from '../service/Generic';
 
+import { GondolinResponse } from '../typings/index';
+import {
+  Request,
+  Response,
+  Application
+} from 'express';
+
+import {
+  FindOptions
+} from 'sequelize-typescript';
+
 import { jwtMiddleWare } from '../service/Authentication';
 import db from '../sequelize';
 const {
@@ -8,8 +19,12 @@ const {
 
 const generic = new Generic();
 
-const optionsFromQueryParams = queryParams => {
-  const options: any = {};
+interface QueryParams {
+  include: string;
+}
+
+const optionsFromQueryParams = (queryParams: QueryParams): FindOptions<any>  => {
+  const options: FindOptions<any> = {};
   const {
     include
   } = queryParams;
@@ -18,134 +33,168 @@ const optionsFromQueryParams = queryParams => {
       options.include = [{ all: true }];
     } else {
       const includeModels = include.split(',');
-      options.include = includeModels.map(model => {
-        return {
-          model: models[model]
-        };
+      options.include = includeModels.map((modelName: string) => {
+        const model = models[modelName];
+        return {model};
       });
     }
   }
   return options;
 };
 
-module.exports = app => {
+module.exports = (app: Application) => {
 
-  app.get('/', (req, res) => {
+  app.get('/', (req: Request, res: Response) => {
     res.send('gondolin-API running.');
   });
 
-  app.get('/:model/describe', (req, res) => {
-    const modelName = req.params.model;
+  app.get('/:model/describe', (req: Request, res: Response) => {
+    const modelName: string = req.params.model;
     try {
       const description = generic.getModelDescription(modelName);
-      res.send({
+      const response: GondolinResponse = {
         success: true,
         data: description
-      });
+      };
+      res.send(response);
     } catch (error) {
-      res.send({
+      const response: GondolinResponse = {
         success: false,
         error
-      });
+      };
+      res.send(response);
     }
   });
 
-  app.get('/:model/get', (req, res) => {
-    const modelName = req.params.model;
+  app.get('/:model/get', (req: Request, res: Response) => {
+    const modelName: string = req.params.model;
     const options = optionsFromQueryParams(req.query);
     generic.getAllEntities(modelName, options)
-      .then(data => res.send({
-        success: true,
-        data
-      }))
-      .catch(error => res.send({
-        success: false,
-        error
-      }));
+      .then(data => {
+        const response: GondolinResponse = {
+          success: true,
+          data
+        };
+        res.send(response);
+      })
+      .catch(error => {
+        const response: GondolinResponse = {
+          success: false,
+          error
+        };
+        res.send(response);
+      });
   });
 
-  app.get('/:model/get/:id', (req, res) => {
-    const modelName = req.params.model;
-    const id = req.params.id;
+  app.get('/:model/get/:id', (req: Request, res: Response) => {
+    const modelName: string = req.params.model;
+    const id: number = req.params.id;
     const options = optionsFromQueryParams(req.query);
     generic.getEntityById(modelName, id, options)
-      .then(data => res.send({
-        success: true,
-        data
-      }))
-      .catch(error => res.send({
-        success: false,
-        error
-      }));
+      .then(data => {
+        const response: GondolinResponse = {
+          success: true,
+          data
+        };
+        res.send(response);
+      })
+      .catch(error => {
+        const response: GondolinResponse = {
+          success: false,
+          error
+        };
+        res.send(response);
+      });
   });
 
-  app.post('/:model/create', jwtMiddleWare, (req, res) => {
+  app.post('/:model/create', jwtMiddleWare, (req: Request, res: Response) => {
     const modelName = req.params.model;
     const {
       user,
       body: requestData
     } = req;
     if (!user) {
-      res.status(403).json({
+      const response: GondolinResponse = {
         success: false,
         message: 'Couldn\'t get user from request.'
-      });
+      };
+      res.status(403).json(response);
     }
     generic.createEntities(modelName, requestData, user)
-      .then(data => res.send({
-        success: true,
-        data
-      }))
-      .catch(error => res.send({
-        success: false,
-        error
-      }));
+      .then(data => {
+        const response: GondolinResponse = {
+          success: true,
+          data
+        };
+        res.send(response);
+      })
+      .catch(error => {
+        const response: GondolinResponse = {
+          success: false,
+          error
+        };
+        res.send(response);
+      });
   });
 
-  app.post('/:model/update', jwtMiddleWare, (req, res) => {
+  app.post('/:model/update', jwtMiddleWare, (req: Request, res: Response) => {
     const modelName = req.params.model;
     const {
       user,
       body: requestData
     } = req;
     if (!user) {
-      res.status(403).json({
+      const response: GondolinResponse = {
         success: false,
         message: 'Couldn\'t get user from request.'
-      });
+      };
+      res.status(403).json(response);
     }
     generic.updateEntities(modelName, requestData)
-      .then(data => res.send({
-        success: true,
-        data
-      }))
-      .catch(error => res.send({
-        success: false,
-        error
-      }));
+      .then(data => {
+        const response: GondolinResponse = {
+          success: true,
+          data
+        };
+        res.send(response);
+      })
+      .catch(error => {
+        const response: GondolinResponse = {
+          success: false,
+          error
+        };
+        res.send(response);
+      });
   });
 
-  app.post('/:model/delete', jwtMiddleWare, (req, res) => {
+  app.post('/:model/delete', jwtMiddleWare, (req: Request, res: Response) => {
     const modelName = req.params.model;
     const {
       user,
       body: requestData
     } = req;
     if (!user) {
-      res.status(403).json({
+      const response: GondolinResponse = {
         success: false,
         message: 'Couldn\'t get user from request.'
-      });
+      };
+      res.status(403).json(response);
     }
     generic.deleteEntities(modelName, requestData)
-      .then(data => res.send({
-        success: true,
-        data
-      }))
-      .catch(error => res.send({
-        success: false,
-        error
-      }));
+      .then(data => {
+        const response: GondolinResponse = {
+          success: true,
+          data
+        };
+        res.send(response);
+      })
+      .catch(error => {
+        const response: GondolinResponse = {
+          success: false,
+          error
+        };
+        res.send(response);
+      });
   });
 
 };

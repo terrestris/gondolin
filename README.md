@@ -20,9 +20,7 @@ secret for the passport authentification.
  * This file should not be pushed to public repositories as it contains the
  * jwt secret!
  */
-export default {
-    secretOrKey: 'mellon'
-}
+export default 'mellon';
 ```
 
 2. Start the database and pgAdmin: `docker-compose --f docker-compose-dev.yml up`

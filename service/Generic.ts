@@ -1,5 +1,5 @@
-import _ = require('lodash');
-
+// TODO switch to lodash es6 modules
+import * as _ from 'lodash';
 import logger from '../config/logger';
 import sequelize from '../sequelize';
 import User from '../models/User';
@@ -7,8 +7,11 @@ import Role from '../models/Role';
 import Layer from '../models/Layer';
 import UserGroup from '../models/UserGroup';
 import Application from '../models/Application';
+import { QueryOptions } from 'sequelize-typescript';
 
-type queryableModel = 'Application' | 'User' | 'UserGroup' | 'Layer' | 'Role';
+import {
+  Model
+} from 'sequelize';
 
 const models: any = {
   Application,
@@ -23,10 +26,10 @@ export default class Generic {
   /**
    * Get a description of the attributes and associations of a given model.
    *
-   * @param {queryableModel} modelName  The model to get the description for.
+   * @param {string} modelName  The model to get the description for.
    * @return {Object} Object containing attributes and assocations of the model.
    */
-  getModelDescription(modelName: queryableModel) {
+  getModelDescription(modelName: string) {
     logger.debug(`Getting model description for ${modelName}.`);
     if (modelName) {
 
@@ -72,7 +75,7 @@ export default class Generic {
    * @return {Object} Object containing the attributes of the geometry column.
    *
    */
-  getGeometryDescription(modelName: queryableModel) {
+  async getGeometryDescription(modelName: string) {
     logger.debug(`Getting geometry description for ${modelName}.`);
     if (modelName) {
       return sequelize
@@ -97,19 +100,18 @@ export default class Generic {
    *
    * @param {String} modelName The model to find the entity of.
    * @param {Number} id The id to find the entity of.
-   * @param {Object} opt Options to be passed to the findById method of sequelize.
+   * @param {QueryOptions} opt Options to be passed to the findById method of sequelize.
    * @return {Promise} Promise resolving with the found entity of the given modelName.
    */
-  getEntityById(modelName: queryableModel, id: number, opt?) {
+  async getEntityById(modelName: string, id: number, opt?: QueryOptions) {
     logger.debug(`Getting ${modelName} with id ${id}.`);
-    if (modelName) {
-      return models[modelName]
-        .findById(id, opt || {})
-        .catch(error => {
-          logger.error(`Could not get ${modelName} with id ${id}: ${error}`);
-          throw error;
-        });
-    }
+    const model: Model<any, any> = models[modelName];
+    return model
+      .findById(id, opt || {})
+      .catch(error => {
+        logger.error(`Could not get ${modelName} with id ${id}: ${error}`);
+        throw error;
+      });
   }
 
   /**
@@ -119,16 +121,15 @@ export default class Generic {
    * @param {Object} opt Options to be passed to the findAll method of sequelize.
    * @return {Promise} Promise resolving with all entities of the given modelName.
    */
-  getAllEntities(modelName: queryableModel, opt) {
+  async getAllEntities(modelName: string, opt?: QueryOptions) {
     logger.debug(`Getting all entities of ${modelName}.`);
-    if (modelName) {
-      return models[modelName]
-        .findAll(opt || {})
-        .catch(error => {
-          logger.error(`Could not get all entities of ${modelName}: ${error}`);
-          throw error;
-        });
-    }
+    const model: Model<any, any> = models[modelName];
+    return model
+      .findAll(opt || {})
+      .catch(error => {
+        logger.error(`Could not get all entities of ${modelName}: ${error}`);
+        throw error;
+      });
   }
 
   /*modelName
@@ -140,7 +141,7 @@ export default class Generic {
    * @return {Promise} Promise resolving with an objects containing the created
    * entity data.
    */
-  createEntity(modelName: queryableModel, data) {
+  async createEntity(modelName: string, data) {
     logger.debug(`Creating ${modelName}.`);
     return models[modelName]
       .create(data)
@@ -160,7 +161,7 @@ export default class Generic {
    * @return {Promise} Promise resolving with an array of objects of the created
    * entities.
    */
-  createEntities(modelName: queryableModel, data, user) {
+  async createEntities(modelName: string, data, user) {
     logger.debug(`Creating ${data.length} ${modelName}s.`);
 
     const associations = models[modelName].associations;
@@ -226,7 +227,7 @@ export default class Generic {
    * @return {Promise} Promise resolving with an array of objects of the updated
    * entities.
    */
-  updateEntities(modelName: queryableModel, data) {
+  async updateEntities(modelName: string, data) {
     logger.debug(`Updating ${data.length} ${modelName}s.`);
 
     const associations = models[modelName].associations;
@@ -273,7 +274,7 @@ export default class Generic {
    * @param {ID[]} ids An array of ids of entities that should be deleted.
    * @return {Promise} A Promise resolving with the number of affected rows.
    */
-  deleteEntities(modelName: queryableModel, ids) {
+  async deleteEntities(modelName: string, ids) {
     logger.debug(`Deleting ${modelName}s with ids ${ids}.`);
     return models[modelName]
       .destroy({
@@ -292,10 +293,10 @@ export default class Generic {
    * @param {String} modelName
    * @param {Object} options
    */
-  countEntities(modelName: queryableModel, options = {}) {
+  async countEntities(modelName: string, opt?: QueryOptions) {
     logger.debug(`Counting entities of ${modelName}.`);
     return models[modelName]
-      .count(options)
+      .count(opt || {})
       .catch(error => {
         logger.error(`Could not count entities of ${modelName}: ${error}`);
       });

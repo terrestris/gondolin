@@ -12,7 +12,7 @@ export default {
     schema: 'gondolin',
     databaseVersion: '10.2.5'
     // TODO Does currently not work... Fix it
-    // 'logging': logger.sequelize
+    // logging: logger.sequelize
   },
   production: {
     database: 'gondolin',
