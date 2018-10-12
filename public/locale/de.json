@@ -20,6 +20,10 @@
     "warning": "Achtung",
     "title": "Titel"
   },
+  "ApplicationHeader": {
+    "login": "Anmelden",
+    "register": "Registrieren"
+  },
   "LandingPage": {
     "welcome": "Willkommen"
   },

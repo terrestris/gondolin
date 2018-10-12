@@ -20,6 +20,10 @@
     "warning": "Warning",
     "title": "Title"
   },
+  "ApplicationHeader": {
+    "login": "Login",
+    "register": "Register"
+  },
   "LoginForm": {
     "name": "Name",
     "username": "Username",
