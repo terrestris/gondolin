@@ -1,9 +1,10 @@
-import jsonwebtoken = require('jsonwebtoken');
-
+import * as jsonwebtoken from 'jsonwebtoken';
 import logger from '../config/logger';
 import secretOrKey from '../config/passport';
 import Generic from './Generic';
 import EntityUploadService from './EntityUpload';
+import User from '../models/User';
+import { GondolinWebsocketResponse } from '../typings';
 
 const generic = new Generic();
 const entityUpload = new EntityUploadService();
@@ -21,14 +22,14 @@ export default class WebSocketService {
   /**
    * Adds a socket to the WebSocketService.socketStore.
    *
-   * @param {WebSocket} socket The WebSocket to add.
+   * @param {WebSocket} websocket The WebSocket to add.
    * @param {User} user The user to add the WebSocket for.
    */
-  addSocket(socket, user) {
+  addSocket(websocket, user: User) {
     logger.debug(`WebSocket for user ${user.username} stored.`);
-    WebSocketService.socketStore[user.username] = socket;
+    WebSocketService.socketStore[user.username] = websocket;
     // When closed, clean up the entry from the websockets hash.
-    socket.on('close', () => {
+    websocket.on('close', () => {
       this.deleteSocket(user);
     });
   }
@@ -38,7 +39,7 @@ export default class WebSocketService {
    *
    * @param {User} user The user to get the WebSocket for.
    */
-  getSocket(user) {
+  getSocket(user: User) {
     return WebSocketService.socketStore[user.username];
   }
 
@@ -61,24 +62,26 @@ export default class WebSocketService {
    * backend have to contain the jason web token as key 'jwt'.
    *
    * @param {String} msg The WebSocket message.
-   * @param {WebSocket} ws The WebSocket itself.
+   * @param {WebSocket} websocket The WebSocket itself.
    * @return {Promise} A Promise resolving with the user or undefined
    * if no jwt could be detected.
    */
-  getUserFromMessage(msg, ws) {
+  getUserFromMessage(msg: string, websocket: WebSocket): Promise<User> {
     const json = JSON.parse(msg);
     const jwt = json.jwt;
     return new Promise((resolve, reject) => {
       if (jwt) {
-        const user = jsonwebtoken.verify(jwt, secretOrKey);
-        resolve(generic.getEntityById('User', user.id));
+        const user: any = jsonwebtoken.verify(jwt, secretOrKey);
+        resolve(generic.getEntityById('User', user.id as number));
       } else {
         const message = 'Could not read jwt from websocket message. Make sure to add the jwt to the json data';
         logger.warn(message);
-        ws.send(JSON.stringify({
+        const response: GondolinWebsocketResponse = {
+          success: false,
           message,
           type: 'error'
-        }));
+        };
+        websocket.send(JSON.stringify(response));
         reject(message);
       }
     });
@@ -90,34 +93,37 @@ export default class WebSocketService {
    *
    * @param {Object} json The message content as json.
    * @param {User} user The user who the message.
-   * @param {WebSocket} ws The WebSocket.
+   * @param {WebSocket} websocket The WebSocket.
    */
-  readMessage(json, user, ws) {
+  readMessage(json: any, user: User, websocket: WebSocket) {
     switch (json.message) {
       // Once logged in, the websockets hash will map usernames to websockets.
       // This message causes the hash to be updated.
       case 'connect':
         try {
-          this.addSocket(ws, user);
-          ws.send(JSON.stringify({
+          this.addSocket(websocket, user);
+          const response: GondolinWebsocketResponse = {
+            success: true,
+            type: 'info',
             message: `WebSocket established for ${user.username}`,
             noPopup: true
-          }));
+          };
+          websocket.send(JSON.stringify(response));
         } catch (error) {
           logger.error(`Can not establish WebSocket: ${error}.`);
         }
         break;
       // starts a new entity import
       case 'startentityimport':
-        entityUpload.startImport(user, json.modelName);
+        entityUpload.startImport(user.username, json.modelName);
         break;
       // get a slice of entity data
       case 'importdata':
-        entityUpload.addData(user, json.data);
+        entityUpload.addData(user.username, json.data);
         break;
       // push the new entities into the DB
       case 'endentityimport':
-        entityUpload.doImport(user, ws);
+        entityUpload.doImport(user.username, websocket);
         break;
     }
   }

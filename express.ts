@@ -4,7 +4,7 @@ import bodyParser = require('body-parser');
 
 import logger from './config/logger';
 
-const app = express();
+const app: express.Application = express();
 require('express-ws')(app);
 const allowCrossDomain = (req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');

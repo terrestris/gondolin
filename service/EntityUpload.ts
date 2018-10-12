@@ -1,23 +1,31 @@
 import Generic from './Generic';
+import { GondolinWebsocketResponse } from '../typings';
 const generic = new Generic();
 
-const CurrentEntityUploads = {};
+interface EntityUploadStore {
+  [username: string]: {
+    modelName: string,
+    data: any[]
+  };
+}
+
+const EntityUploadStore: EntityUploadStore = {};
 
 /**
  * Creates entities. It collects entity data in an array until the DB import
  * is actually triggered by the endentityimport message.
  *
- * @class EntityUploadService
+ * @class EntityUploadStoreService
  */
 export default class EntityUploadService {
 
   /**
    * Creates a new import config.
-   * @param  {string} user the user doing the import
+   * @param  {string} username the user doing the import
    * @param  {string} modelName the entity type to import
    */
-  startImport(user, modelName) {
-    CurrentEntityUploads[user] = {
+  startImport(username: string, modelName: string) {
+    EntityUploadStore[username] = {
       modelName,
       data: []
     };
@@ -25,36 +33,40 @@ export default class EntityUploadService {
 
   /**
    * Adds a slice of entity data.
-   * @param {string} user the importing user
+   * @param {string} username the importing user
    * @param {object[]} data the data to add
    */
-  addData(user, data) {
-    const config = CurrentEntityUploads[user];
+  addData(username: string, data: any[]) {
+    const config = EntityUploadStore[username];
     config.data = config.data.concat(data);
   }
 
   /**
    * Performs the actual import into the DB.
-   * @param  {string} user the user doing the import
+   * @param  {string} username the user doing the import
    * @param  {Websocket} websocket the user's websocket to notify once the import
    * is done
    */
-  doImport(user, websocket) {
-    const config = CurrentEntityUploads[user];
-    generic.createEntities(config.modelName, config.data, user)
+  doImport(username: string, websocket: WebSocket) {
+    const config = EntityUploadStore[username];
+    generic.createEntities(config.modelName, config.data, username)
       .then(data => {
-        websocket.send(JSON.stringify({
-          entityImportDone: true,
-          entityImportMessage: data
-        }));
-        delete CurrentEntityUploads[user];
+        const response: GondolinWebsocketResponse = {
+          type: 'import',
+          success: true,
+          data
+        };
+        websocket.send(JSON.stringify(response));
+        delete EntityUploadStore[username];
       })
       .catch(error => {
-        websocket.send(JSON.stringify({
-          entityImportError: true,
+        const response: GondolinWebsocketResponse = {
+          success: false,
+          type: 'import',
           error
-        }));
-        delete CurrentEntityUploads[user];
+        };
+        websocket.send(JSON.stringify(response));
+        delete EntityUploadStore[username];
       });
   }
 
