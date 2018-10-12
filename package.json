@@ -5,7 +5,7 @@
   "license": "BSD-2-Clause",
   "repository": {
     "type": "git",
-    "url": "https://gitlab.intranet.terrestris.de/terrestris/gondolin"
+    "url": "https://github.com/terrestris/gondolin"
   },
   "keywords": [
     "gondolin"
