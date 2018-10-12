@@ -1,4 +1,4 @@
-import * as winston  from 'winston';
+import * as winston from 'winston';
 import * as moment from 'moment';
 const environment: string = process.env.NODE_ENV || 'production';
 import * as path from 'path';

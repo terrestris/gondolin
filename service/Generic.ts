@@ -1,5 +1,5 @@
 // TODO switch to lodash es6 modules
-import * as _  from 'lodash';
+import * as _ from 'lodash';
 import logger from '../config/logger';
 import sequelize from '../sequelize';
 import User from '../models/User';

@@ -19,9 +19,9 @@ const {
 
 const generic = new Generic();
 
-type QueryParams = {
-  include: string
-};
+interface QueryParams {
+  include: string;
+}
 
 const optionsFromQueryParams = (queryParams: QueryParams): FindOptions<any>  => {
   const options: FindOptions<any> = {};
@@ -56,7 +56,7 @@ module.exports = (app: Application) => {
         success: true,
         data: description
       };
-      res.send(response)
+      res.send(response);
     } catch (error) {
       const response: GondolinResponse = {
         success: false,
@@ -75,14 +75,14 @@ module.exports = (app: Application) => {
           success: true,
           data
         };
-        res.send(response)
+        res.send(response);
       })
       .catch(error => {
         const response: GondolinResponse = {
           success: false,
           error
         };
-        res.send(response)
+        res.send(response);
       });
   });
 
@@ -96,14 +96,14 @@ module.exports = (app: Application) => {
           success: true,
           data
         };
-        res.send(response)
+        res.send(response);
       })
       .catch(error => {
         const response: GondolinResponse = {
           success: false,
           error
         };
-        res.send(response)
+        res.send(response);
       });
   });
 
@@ -126,14 +126,14 @@ module.exports = (app: Application) => {
           success: true,
           data
         };
-        res.send(response)
+        res.send(response);
       })
       .catch(error => {
         const response: GondolinResponse = {
           success: false,
           error
         };
-        res.send(response)
+        res.send(response);
       });
   });
 
@@ -156,14 +156,14 @@ module.exports = (app: Application) => {
           success: true,
           data
         };
-        res.send(response)
+        res.send(response);
       })
       .catch(error => {
         const response: GondolinResponse = {
           success: false,
           error
         };
-        res.send(response)
+        res.send(response);
       });
   });
 
@@ -186,14 +186,14 @@ module.exports = (app: Application) => {
           success: true,
           data
         };
-        res.send(response)
+        res.send(response);
       })
       .catch(error => {
         const response: GondolinResponse = {
           success: false,
           error
         };
-        res.send(response)
+        res.send(response);
       });
   });
 

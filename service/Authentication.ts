@@ -1,15 +1,15 @@
 import logger from '../config/logger';
 import * as passport from 'passport';
 import * as jwt from 'jsonwebtoken';
-import * as passportJWT from "passport-jwt";
 import * as express from 'express';
 import SecurityUtil from '../util/SecurityUtil';
 import User from '../models/User';
 
-import { StrategyOptions } from 'passport-jwt';
-
-const ExtractJwt = passportJWT.ExtractJwt;
-const JwtStrategy = passportJWT.Strategy;
+import {
+  StrategyOptions,
+  ExtractJwt,
+  Strategy as JwtStrategy
+} from 'passport-jwt';
 
 import secretOrKey from '../config/passport';
 
@@ -65,7 +65,7 @@ export default class AuthenticationService {
    * @memberof AuthenticationService
    * @async
    */
-  async login(inputName: string, inputPassword:string) {
+  async login(inputName: string, inputPassword: string) {
     logger.info('User is trying to login.');
 
     return User.scope('withPassword').findOne({

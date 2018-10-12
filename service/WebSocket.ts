@@ -66,7 +66,7 @@ export default class WebSocketService {
    * @return {Promise} A Promise resolving with the user or undefined
    * if no jwt could be detected.
    */
-  getUserFromMessage(msg:string, websocket: WebSocket): Promise<User> {
+  getUserFromMessage(msg: string, websocket: WebSocket): Promise<User> {
     const json = JSON.parse(msg);
     const jwt = json.jwt;
     return new Promise((resolve, reject) => {

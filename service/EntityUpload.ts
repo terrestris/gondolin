@@ -2,12 +2,12 @@ import Generic from './Generic';
 import { GondolinWebsocketResponse } from '../typings';
 const generic = new Generic();
 
-type EntityUploadStore = {
+interface EntityUploadStore {
   [username: string]: {
     modelName: string,
     data: any[]
-  }
-};
+  };
+}
 
 const EntityUploadStore: EntityUploadStore = {};
 
