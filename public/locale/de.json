@@ -19,5 +19,43 @@
     "error": "Fehler",
     "warning": "Achtung",
     "title": "Titel"
+  },
+  "LandingPage": {
+    "welcome": "Willkommen"
+  },
+  "LoginPage": {
+    "login": "Anmelden"
+  },
+  "RegistrationPage": {
+    "registration": "Registrierung"
+  },
+  "LoginForm": {
+    "name": "Name",
+    "username": "Benutzername",
+    "password": "Passwort",
+    "failed": "Anmeldung fehlgeschlagen",
+    "bytokenfailed": "Benutzer per Token bestimmen fehlgeschlagen"
+  },
+  "RegistrationForm": {
+    "failed": "Registrierung fehlgeschlagen",
+    "success": "Registrierung von {{user}} war erfolgreich. Sie können sich nun einloggen.",
+    "title": "Titel",
+    "givenname": "Vorname",
+    "familyname": "Nachname",
+    "username": "Benutzername",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "confirmpassword": "Passwort bestätigen",
+    "mobile": "Mobil",
+    "landline": "Festnetz",
+    "fax": "Fax",
+    "street": "Straße",
+    "housenumber": "Hausnummer",
+    "zipcode": "Postleitzahl",
+    "city": "Ort",
+    "register": "Registrieren"
+  },
+  "EventLog": {
+    "eventLog": "Ereignis Protokoll"
   }
 }

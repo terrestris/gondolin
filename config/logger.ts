@@ -1,7 +1,7 @@
-const winston = require('winston');
-const moment = require('moment');
-const environment = process.env.NODE_ENV || 'production';
-const path = require('path');
+import * as winston  from 'winston';
+import * as moment from 'moment';
+const environment: string = process.env.NODE_ENV || 'production';
+import * as path from 'path';
 
 // gondolin/logs
 const logPath = path.resolve(__dirname) + '/../log';
@@ -36,7 +36,7 @@ const consoleFormat = format.printf((info) => {
   return `${timestamp} [${info.level}]: ${info.message}`;
 });
 
-const logger = createLogger({
+const logger: winston.Logger = createLogger({
   level: 'debug',
   levels,
   format: format.combine(

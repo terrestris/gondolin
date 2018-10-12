@@ -1,18 +1,22 @@
 import logger from '../config/logger';
-import passport = require('passport');
-import jwt = require('jsonwebtoken');
-import passportJWT = require("passport-jwt");
+import * as passport from 'passport';
+import * as jwt from 'jsonwebtoken';
+import * as passportJWT from "passport-jwt";
+import * as express from 'express';
 import SecurityUtil from '../util/SecurityUtil';
 import User from '../models/User';
+
+import { StrategyOptions } from 'passport-jwt';
 
 const ExtractJwt = passportJWT.ExtractJwt;
 const JwtStrategy = passportJWT.Strategy;
 
 import secretOrKey from '../config/passport';
 
-const jwtOptions: any = {};
-jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-jwtOptions.secretOrKey = secretOrKey;
+const jwtOptions: StrategyOptions = {
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  secretOrKey
+};
 
 // TODO Move to seperate File
 export const jwtStrategy = new JwtStrategy(jwtOptions, (jwtPayload, next) => {
@@ -43,7 +47,7 @@ export default class AuthenticationService {
    * @param {ExpressApp} app
    * @memberof AuthenticationService
    */
-  constructor(app) {
+  constructor(app: express.Application) {
     passport.use(jwtStrategy);
     app.use(passport.initialize());
   }
@@ -61,7 +65,7 @@ export default class AuthenticationService {
    * @memberof AuthenticationService
    * @async
    */
-  async login(inputName, inputPassword) {
+  async login(inputName: string, inputPassword:string) {
     logger.info('User is trying to login.');
 
     return User.scope('withPassword').findOne({
@@ -92,7 +96,7 @@ export default class AuthenticationService {
             username
           };
 
-          const token = jwt.sign(payload, jwtOptions.secretOrKey);
+          const token = jwt.sign(payload, jwtOptions.secretOrKey as jwt.Secret);
           return {
             success: true,
             message: "User logged in.",

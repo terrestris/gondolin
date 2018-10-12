@@ -11,7 +11,7 @@ export default {
     protocol: 'postgres',
     schema: 'gondolin',
     // TODO Does currently not work... Fix it
-    // 'logging': logger.sequelize
+    // logging: logger.sequelize
   },
   production: {
     database: 'gondolin',

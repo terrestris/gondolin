@@ -1,4 +1,4 @@
-import bCrypt = require('bcrypt-nodejs');
+import * as bCrypt from 'bcrypt-nodejs';
 
 /**
  *
