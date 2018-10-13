@@ -20,6 +20,18 @@
     "warning": "Warning",
     "title": "Title"
   },
+  "Entities": {
+    "application": "Application",
+    "applications": "Applications",
+    "layer": "Layer",
+    "layers": "Layers",
+    "user": "User",
+    "users": "Users",
+    "usergroup": "User Group",
+    "usergroups": "User Groups",
+    "role": "Role",
+    "roles": "Roles"
+  },
   "ApplicationHeader": {
     "login": "Login",
     "register": "Register",
@@ -63,5 +75,45 @@
   },
   "EventLog": {
     "eventLog": "Event log"
+  },
+  "ManagementPage": {
+    "management": "Management",
+    "structuralData": "Structural Data"
+  },
+  "ManagementGrid": {
+    "validation": {
+      "isRequired": "Field {{field}} is required.",
+      "isNotANumber": "Field {{field}} is not a number.",
+      "isNotAnInteger": "Field {{field}} is not an integer.",
+      "decimalSeperator": "Field {{field}} has to use '.' as decimal seperator."
+    },
+    "csv": {
+      "unknownExperimentalFactors": "Invalid CSV. The File contains unknown ExperimentalFactors {{invalidFactors}}. Please create those first.",
+      "parsingError": "Error while reading CSV: {{error}}.",
+      "noCsvFile": "This doesn't theme to be a CSV file.",
+      "emptyHeader": "CSV contains empty headers.",
+      "parsed": "Parsed {{count}} rows from {{fileName}}."
+    },
+    "encoding": "Encoding",
+    "fieldSeperator": "Field Seperator",
+    "textSeperator": "Text Seperator",
+    "tabulator": "Tabulator",
+    "comma": "Comma",
+    "semicolon": "Semicolon",
+    "space": "Space",
+    "singleQuote": "Single Quote",
+    "doubleQuote": "Double Quote",
+    "csvFile": "CSV File",
+    "loadingSuccess": "{{count}} {{modelName}}(s) loaded.",
+    "importData": "Import Data",
+    "importing": "Importing…",
+    "importSuccess": "{{count}} {{modelName}}(s) imported.",
+    "deleteConfirm": "Are you sure you want to delete the selected rows?",
+    "deleting": "Deleting…",
+    "deleteSuccess": "{{count}} {{modelName}}(s) deleted.",
+    "saveConfirm": "Are you sure you want to save the changes?",
+    "saving": "Updating…",
+    "saveSuccess": "{{count}} {{modelName}}(s) update.",
+    "featureEditorTitle": "Geometry Editor"
   }
 }
