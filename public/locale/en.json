@@ -20,6 +20,14 @@
     "warning": "Warning",
     "title": "Title"
   },
+  "ApplicationHeader": {
+    "login": "Login",
+    "register": "Register",
+    "management": "Management",
+    "analysis": "Analysis",
+    "map": "Map",
+    "logout": "Logout"
+  },
   "LoginForm": {
     "name": "Name",
     "username": "Username",
