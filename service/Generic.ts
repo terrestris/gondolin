@@ -96,7 +96,7 @@ export default class Generic {
     }
   }
 
-    /**
+  /**
    * Creates an object to map a given id of an entity to a specific column.
    *
    * These id maps are (among others) used for the CSV import so you can e.g.
@@ -113,9 +113,10 @@ export default class Generic {
   getIdMap(modelName, opt) {
     logger.debug(`Creating a id map for ${modelName}`);
     const associationColumn = associationMapping[modelName];
-    const options = Object.assign({
-      attributes: ['id', associationColumn]
-    }, opt);
+    const options = {
+      attributes: ['id', associationColumn],
+      opt
+    };
     return models[modelName]
       .findAll(options || {})
       .then((entities) => {
