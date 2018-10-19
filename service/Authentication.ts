@@ -128,7 +128,9 @@ export default class AuthenticationService {
   async register(userData) {
     const {
       username,
-      password
+      password,
+      details,
+      clientConfig
     } = userData;
 
     logger.debug(`Registering user ${username}.`);
@@ -137,7 +139,9 @@ export default class AuthenticationService {
 
     return User.create({
         username,
-        password: hashedPassword
+        password: hashedPassword,
+        details,
+        clientConfig
       })
         .then((user: User) => {
           if (user) {

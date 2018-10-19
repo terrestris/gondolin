@@ -33,7 +33,8 @@ export default class User extends Model<User> {
   @Column(DataType.JSONB)
   details: any;
 
-  @Column(DataType.JSONB)
+  @AllowNull(false)
+  @Column
   password: string;
 
   @Unique

@@ -20,6 +20,14 @@
     "warning": "Achtung",
     "title": "Titel"
   },
+  "ApplicationHeader": {
+    "login": "Anmelden",
+    "register": "Registrieren",
+    "management": "Management",
+    "analysis": "Analyse",
+    "map": "Karte",
+    "logout": "Abmelden"
+  },
   "LandingPage": {
     "welcome": "Willkommen"
   },

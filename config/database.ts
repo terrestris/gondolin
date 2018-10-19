@@ -10,6 +10,7 @@ export default {
     port: 5555,
     protocol: 'postgres',
     schema: 'gondolin',
+    databaseVersion: '10.2.5'
     // TODO Does currently not work... Fix it
     // logging: logger.sequelize
   },
@@ -22,6 +23,7 @@ export default {
     port: 5432,
     protocol: 'postgres',
     schema: 'gondolin',
+    databaseVersion: '10.2.5',
     logging: false
   }
 };
