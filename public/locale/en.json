@@ -88,7 +88,6 @@
       "decimalSeperator": "Field {{field}} has to use '.' as decimal seperator."
     },
     "csv": {
-      "unknownExperimentalFactors": "Invalid CSV. The File contains unknown ExperimentalFactors {{invalidFactors}}. Please create those first.",
       "parsingError": "Error while reading CSV: {{error}}.",
       "noCsvFile": "This doesn't theme to be a CSV file.",
       "emptyHeader": "CSV contains empty headers.",

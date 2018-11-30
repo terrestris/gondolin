@@ -27,8 +27,8 @@
     "layers": "Themen",
     "user": "Nutzer",
     "users": "Nutzer",
-    "usergroup": "Nutzer Gruppe",
-    "usergroups": "Nutzer Gruppen",
+    "usergroup": "Nutzergruppe",
+    "usergroups": "Nutzergruppen",
     "role": "Rolle",
     "roles": "Rollen"
   },
@@ -88,7 +88,6 @@
       "decimalSeperator": "Feld {{field}} muss den Dezimaltrenner '.' verwenden."
     },
     "csv": {
-      "unknownExperimentalFactors": "Invalides CSV. Die CSV-Datei enthält die unbekannten Versuchsfaktoren {{invalidFactors}}. Bitte legen Sie diese zuerst an.",
       "parsingError": "Fehler beim lesen der CSV Datei: {{error}}.",
       "noCsvFile": "Dies scheint keine CSV Datei zu sein.",
       "emptyHeader": "Die CSV Datei enthält leere Werte in der Kopfzeile.",
@@ -114,6 +113,6 @@
     "saveConfirm": "Wollen sie die Änderungen wirklich speichern?",
     "saving": "Aktualisiert…",
     "saveSuccess": "{{count}} Entitäte(n) von {{modelName}} aktualisiert.",
-    "featureEditorTitle": "Geometrie Editor"
+    "featureEditorTitle": "Geometrie-Editor"
   }
 }
