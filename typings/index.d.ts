@@ -9,7 +9,6 @@ export interface GondolinResponse {
   data?: any
 }
 
-
 /**
  * The response object of a webservice.
  */

@@ -20,13 +20,17 @@
     "warning": "Achtung",
     "title": "Titel"
   },
-  "ApplicationHeader": {
-    "login": "Anmelden",
-    "register": "Registrieren",
-    "management": "Management",
-    "analysis": "Analyse",
-    "map": "Karte",
-    "logout": "Abmelden"
+  "Entities": {
+    "application": "Applikation",
+    "applications": "Applikationen",
+    "layer": "Thema",
+    "layers": "Themen",
+    "user": "Nutzer",
+    "users": "Nutzer",
+    "usergroup": "Nutzergruppe",
+    "usergroups": "Nutzergruppen",
+    "role": "Rolle",
+    "roles": "Rollen"
   },
   "LandingPage": {
     "welcome": "Willkommen"
@@ -36,6 +40,12 @@
   },
   "RegistrationPage": {
     "registration": "Registrierung"
+  },
+  "ApplicationHeader": {
+    "login": "Anmelden",
+    "register": "Registrieren",
+    "logout": "{{user}} abmelden",
+    "management": "Verwaltung"
   },
   "LoginForm": {
     "name": "Name",
@@ -65,5 +75,44 @@
   },
   "EventLog": {
     "eventLog": "Ereignis Protokoll"
+  },
+  "ManagementPage": {
+    "management": "Verwaltung",
+    "structuralData": "Structural Data"
+  },
+  "ManagementGrid": {
+    "validation": {
+      "isRequired": "Feld {{field}} darf nicht leer sein.",
+      "isNotANumber": "Feld {{field}} muss eine Zahl enthalten.",
+      "isNotAnInteger": "Feld {{field}} muss eine Ganzzahl enthalten.",
+      "decimalSeperator": "Feld {{field}} muss den Dezimaltrenner '.' verwenden."
+    },
+    "csv": {
+      "parsingError": "Fehler beim lesen der CSV Datei: {{error}}.",
+      "noCsvFile": "Dies scheint keine CSV Datei zu sein.",
+      "emptyHeader": "Die CSV Datei enthält leere Werte in der Kopfzeile.",
+      "parsed": "{{count}} Entitäte(n) aus {{fileName}} eingelesen."
+    },
+    "encoding": "Enkodierung",
+    "fieldSeperator": "Feldtrenner",
+    "textSeperator": "Texttrenner",
+    "tabulator": "Tabulator",
+    "comma": "Komma",
+    "semicolon": "Semikolon",
+    "space": "Leerzeichen",
+    "singleQuote": "Einfache Anführungszeichen",
+    "doubleQuote": "Doppelte Anführungszeichen",
+    "csvFile": "CSV Datei",
+    "loadingSuccess": "{{count}} Entitäte(n) von {{modelName}} geladen.",
+    "importData": "Daten importieren",
+    "importing": "Importiert…",
+    "importSuccess": "{{count}} Entitäte(n) von {{modelName}} importiert.",
+    "deleteConfirm": "Wollen sie die selektierten Einträge wirklich löschen?",
+    "deleting": "Löscht…",
+    "deleteSuccess": "{{count}} Entitäte(n) von {{modelName}} gelöscht.",
+    "saveConfirm": "Wollen sie die Änderungen wirklich speichern?",
+    "saving": "Aktualisiert…",
+    "saveSuccess": "{{count}} Entitäte(n) von {{modelName}} aktualisiert.",
+    "featureEditorTitle": "Geometrie-Editor"
   }
 }

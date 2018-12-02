@@ -31,5 +31,5 @@ export default class ServiceAccess extends Model<ServiceAccess> {
   type: 'ALLOW' | 'DENY' | 'MODIFY';
 
   @BelongsToMany(() => Role, () => Role_ServiceAccess)
-  roles: Role[];
+  Roles: Role[];
 }
