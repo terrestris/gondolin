@@ -63,3 +63,6 @@ config/passport.ts
 
 #postgresql
 postgresql_data
+
+# VS Code
+*.code-workspace
