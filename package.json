@@ -44,7 +44,7 @@
     "moment": "2.22.2",
     "passport": "0.4.0",
     "passport-jwt": "4.0.0",
-    "pg": "7.7.1",
+    "pg": "7.8.0",
     "reflect-metadata": "0.1.12",
     "request": "2.88.0",
     "request-promise-native": "1.0.5",
