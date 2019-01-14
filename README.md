@@ -39,4 +39,5 @@ docker-compose up
 ## Default users
 
 PostgreSQL: gondolin / gondolin
+
 pgAdmin: admin / admin
