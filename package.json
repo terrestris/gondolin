@@ -30,7 +30,7 @@
   "dependencies": {
     "@types/bluebird": "3.5.25",
     "@types/express": "4.16.1",
-    "@types/node": "11.9.4",
+    "@types/node": "11.9.5",
     "@types/passport-jwt": "3.0.1",
     "@types/sequelize": "4.27.37",
     "@types/websocket": "0.0.40",
