@@ -51,7 +51,7 @@
     "sequelize": "4.43.0",
     "sequelize-cli": "5.4.0",
     "sequelize-typescript": "1.0.0-alpha.4",
-    "ts-node": "8.0.3",
+    "ts-node": "8.1.0",
     "tslint": "5.11.0",
     "tslint-plugin-node": "3.0.0-beta.7",
     "typescript": "3.1.1",
