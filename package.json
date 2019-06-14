@@ -59,5 +59,8 @@
   },
   "engines": {
     "node": ">=8.3.0"
+  },
+  "devDependencies": {
+    "np": "5.0.3"
   }
 }
