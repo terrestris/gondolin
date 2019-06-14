@@ -23,8 +23,7 @@ secret for the passport authentification.
 export default 'mellon';
 ```
 
-2. Start the database and pgAdmin: `docker-compose --f docker-compose-dev.yml up`
-
+2. Start the database and pgAdmin: `docker-compose --f docker-compose-dev.yml up`. pgAdmin will be available at `http://localhost:5050`
 3. Run `npm install` and then `npm start` and gondolin will be available at `http://localhost:3000`.
 
 
