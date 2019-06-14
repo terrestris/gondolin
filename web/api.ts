@@ -7,12 +7,10 @@ import {
   Application
 } from 'express';
 
-import {
-  FindOptions
-} from 'sequelize-typescript';
-
 import { jwtMiddleWare } from '../service/Authentication';
 import db from '../sequelize';
+import { FindOptions } from 'sequelize/types';
+import logger from '../config/logger';
 const {
   models
 } = db;
@@ -23,8 +21,8 @@ interface QueryParams {
   include: string;
 }
 
-const optionsFromQueryParams = (queryParams: QueryParams): FindOptions<any>  => {
-  const options: FindOptions<any> = {};
+const optionsFromQueryParams = (queryParams: QueryParams): FindOptions  => {
+  const options: FindOptions = {};
   const {
     include
   } = queryParams;
@@ -62,6 +60,7 @@ module.exports = (app: Application) => {
         success: false,
         error
       };
+      logger.error(error);
       res.send(response);
     }
   });
@@ -82,6 +81,7 @@ module.exports = (app: Application) => {
           success: false,
           error
         };
+        logger.error(error);
         res.send(response);
       });
   });
@@ -102,6 +102,7 @@ module.exports = (app: Application) => {
           success: false,
           error
         };
+        logger.error(error);
         res.send(response);
       });
   });
@@ -123,6 +124,7 @@ module.exports = (app: Application) => {
           success: false,
           error
         };
+        logger.error(error);
         res.send(response);
       });
   });
@@ -153,6 +155,7 @@ module.exports = (app: Application) => {
           success: false,
           error
         };
+        logger.error(error);
         res.send(response);
       });
   });
@@ -183,6 +186,7 @@ module.exports = (app: Application) => {
           success: false,
           error
         };
+        logger.error(error);
         res.send(response);
       });
   });
@@ -213,6 +217,7 @@ module.exports = (app: Application) => {
           success: false,
           error
         };
+        logger.error(error);
         res.send(response);
       });
   });

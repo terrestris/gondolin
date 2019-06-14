@@ -7,11 +7,11 @@ import Role from '../models/Role';
 import Layer from '../models/Layer';
 import UserGroup from '../models/UserGroup';
 import Application from '../models/Application';
-import { QueryOptions } from 'sequelize-typescript';
 const associationMapping = require('../config/pKeyAssociations.json');
 
 import {
-  Model
+  CountOptions,
+  FindOptions
 } from 'sequelize';
 
 const models: any = {
@@ -34,7 +34,7 @@ export default class Generic {
     logger.debug(`Getting model description for ${modelName}.`);
     if (modelName) {
 
-      const attributes = _.cloneDeep(models[modelName].attributes);
+      const attributes = _.cloneDeep(models[modelName].tableAttributes);
       const associations = _.cloneDeep(models[modelName].associations);
 
       Object.keys(attributes).forEach(attributeName => {
@@ -84,7 +84,7 @@ export default class Generic {
           'FROM geometry_columns ' +
           'WHERE f_geometry_column = \'geom\' ' +
           'AND f_table_name = :table_name', {
-          type: sequelize.QueryTypes.SELECT,
+          type: 'SELECT',
           replacements: {
             table_name: modelName + 's'
           }
@@ -140,11 +140,12 @@ export default class Generic {
    * @param {QueryOptions} opt Options to be passed to the findById method of sequelize.
    * @return {Promise} Promise resolving with the found entity of the given modelName.
    */
-  async getEntityById(modelName: string, id: number, opt?: QueryOptions) {
+  async getEntityById(modelName: string, id: number, opt?: FindOptions) {
     logger.debug(`Getting ${modelName} with id ${id}.`);
-    const model: Model<any, any> = models[modelName];
+    const model = models[modelName];
+
     return model
-      .findById(id, opt || {})
+      .findByPk(id, opt || {})
       .catch(error => {
         logger.error(`Could not get ${modelName} with id ${id}: ${error}`);
         throw error;
@@ -158,9 +159,9 @@ export default class Generic {
    * @param {Object} opt Options to be passed to the findAll method of sequelize.
    * @return {Promise} Promise resolving with all entities of the given modelName.
    */
-  async getAllEntities(modelName: string, opt?: QueryOptions) {
+  async getAllEntities(modelName: string, opt?: FindOptions) {
     logger.debug(`Getting all entities of ${modelName}.`);
-    const model: Model<any, any> = models[modelName];
+    const model = models[modelName];
     return model
       .findAll(opt || {})
       .catch(error => {
@@ -233,7 +234,7 @@ export default class Generic {
                     });
                   }
                 });
-              return sequelize.Promise.all(updatePromises);
+              return Promise.all(updatePromises);
             })
             .catch(error => {
               logger.error(`Could not create entities of ${modelName}: ${error}`);
@@ -241,7 +242,7 @@ export default class Generic {
             });
         });
 
-        return sequelize.Promise.all(promises);
+        return Promise.all(promises);
       });
     } else {
       // Bulk create instances
@@ -300,7 +301,7 @@ export default class Generic {
         });
     });
 
-    return sequelize.Promise.all(promises);
+    return Promise.all(promises);
   }
 
   /**
@@ -330,7 +331,7 @@ export default class Generic {
    * @param {String} modelName
    * @param {Object} options
    */
-  async countEntities(modelName: string, opt?: QueryOptions) {
+  async countEntities(modelName: string, opt?: CountOptions) {
     logger.debug(`Counting entities of ${modelName}.`);
     return models[modelName]
       .count(opt || {})

@@ -19,7 +19,7 @@ import User_UserGroup from "./belongsToMany/User_UserGroup";
 })
 @Scopes({
   withPassword: {
-    attributes: {}
+    attributes: undefined
   }
 })
 @Table({
