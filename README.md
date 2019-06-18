@@ -31,7 +31,7 @@ Afterwards…
 
 - … **gondolin** will be available at `http://localhost:3000`
   - Example rest request: `http://localhost:3000/Application/get` (rest api is deprecated --> use GraphQL)
-- … **GraphiQL** will be available at: http://localhost:3000/graphql? (Click on `RootQueryType`) at the right side to get more information about the API.
+- … **GraphiQL** will be available at: `http://localhost:3000/graphql?` (Click on `RootQueryType`) at the right side to get more information about the API.
 - … **pgAdmin** will be available at `http://localhost:5050` (admin / admin)
 
 ## Run via docker / docker-compose
