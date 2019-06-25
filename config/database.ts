@@ -1,4 +1,4 @@
-// import logger from './logger';
+import logger from './logger';
 
 export default {
   development: {
@@ -10,9 +10,10 @@ export default {
     port: 5555,
     protocol: 'postgres',
     schema: 'gondolin',
-    databaseVersion: '10.2.5'
-    // TODO Does currently not work... Fix it
-    // logging: logger.sequelize
+    databaseVersion: '10.2.5',
+    logging: (msg) => {
+      logger.log('sequelize', msg);
+    }
   },
   production: {
     database: 'gondolin',
