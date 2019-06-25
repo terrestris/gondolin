@@ -28,13 +28,13 @@
     ],
     "no-var-requires": false,
     "quotemark": [
+      true,
       "single"
     ],
     "triple-equals": true,
     "member-ordering": [
       true,
-      "public-before-private",
-      "variables-before-functions"
+      "public-instance-method"
     ],
     "variable-name": [
       true,

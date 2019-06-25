@@ -3,9 +3,9 @@ import {
   Table,
   ForeignKey,
   Column
-} from "sequelize-typescript";
-import UserGroup from "../UserGroup";
-import User from "../User";
+} from 'sequelize-typescript';
+import UserGroup from '../UserGroup';
+import User from '../User';
 
 @Table
 export default class User_UserGroup extends Model<User_UserGroup> {

@@ -4,7 +4,7 @@ import {
     Column,
     Table,
     AllowNull
-} from "sequelize-typescript";
+} from 'sequelize-typescript';
 
 @Table({
   timestamps: true

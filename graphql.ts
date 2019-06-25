@@ -5,7 +5,7 @@ import {
   GraphQLInt,
   GraphQLList,
   GraphQLString
-} from "graphql";
+} from 'graphql';
 
 import sequelize from './sequelize';
 
@@ -20,7 +20,7 @@ import {
   JSONType
 } from 'graphql-sequelize';
 
-import Layer from "./models/Layer";
+import Layer from './models/Layer';
 
 const defaultListArgs = {
   limit: {

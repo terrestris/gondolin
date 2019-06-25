@@ -5,7 +5,7 @@ import {
     Table,
     Unique,
     AllowNull
-} from "sequelize-typescript";
+} from 'sequelize-typescript';
 
 @Table({
   timestamps: true

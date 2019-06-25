@@ -6,10 +6,10 @@ import {
     ForeignKey,
     BelongsTo,
     BelongsToMany
-} from "sequelize-typescript";
-import Role from "./Role";
-import EntityOperation from "./EntityOperation";
-import Role_EntityAccess from "./belongsToMany/Role_EntityAccess";
+} from 'sequelize-typescript';
+import Role from './Role';
+import EntityOperation from './EntityOperation';
+import Role_EntityAccess from './belongsToMany/Role_EntityAccess';
 
 @Table({
   timestamps: true

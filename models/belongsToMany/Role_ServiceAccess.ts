@@ -3,9 +3,9 @@ import {
   Table,
   ForeignKey,
   Column
-} from "sequelize-typescript";
-import Role from "../Role";
-import ServiceAccess from "../ServiceAccess";
+} from 'sequelize-typescript';
+import Role from '../Role';
+import ServiceAccess from '../ServiceAccess';
 
 @Table
 export default class Role_ServiceAccess extends Model<Role_ServiceAccess> {
