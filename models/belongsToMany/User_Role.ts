@@ -3,9 +3,9 @@ import {
   Table,
   ForeignKey,
   Column
-} from "sequelize-typescript";
-import User from "../User";
-import Role from "../Role";
+} from 'sequelize-typescript';
+import User from '../User';
+import Role from '../Role';
 
 @Table
 export default class User_Role extends Model<User_Role> {

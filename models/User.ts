@@ -8,9 +8,9 @@ import {
     DefaultScope,
     Scopes,
     BelongsToMany
-} from "sequelize-typescript";
-import UserGroup from "./UserGroup";
-import User_UserGroup from "./belongsToMany/User_UserGroup";
+} from 'sequelize-typescript';
+import UserGroup from './UserGroup';
+import User_UserGroup from './belongsToMany/User_UserGroup';
 
 @DefaultScope({
   attributes: {

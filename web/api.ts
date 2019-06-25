@@ -27,7 +27,7 @@ const optionsFromQueryParams = (queryParams: QueryParams): FindOptions  => {
     include
   } = queryParams;
   if (include) {
-    if (include === "all") {
+    if (include === 'all') {
       options.include = [{ all: true }];
     } else {
       const includeModels = include.split(',');

@@ -5,9 +5,9 @@ import {
     AllowNull,
     BelongsToMany,
     DataType
-} from "sequelize-typescript";
-import Role from "./Role";
-import Role_ServiceAccess from "./belongsToMany/Role_ServiceAccess";
+} from 'sequelize-typescript';
+import Role from './Role';
+import Role_ServiceAccess from './belongsToMany/Role_ServiceAccess';
 
 @Table({
   timestamps: true

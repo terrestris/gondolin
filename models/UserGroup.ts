@@ -5,9 +5,9 @@ import {
     Unique,
     AllowNull,
     BelongsToMany
-} from "sequelize-typescript";
-import User from "./User";
-import User_UserGroup from "./belongsToMany/User_UserGroup";
+} from 'sequelize-typescript';
+import User from './User';
+import User_UserGroup from './belongsToMany/User_UserGroup';
 
 @Table({
   timestamps: true

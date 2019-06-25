@@ -78,7 +78,7 @@ export default class AuthenticationService {
           logger.info('Login failed. No such user.');
           return {
             success: false,
-            message: "No such user."
+            message: 'No such user.'
           };
         }
 
@@ -99,14 +99,14 @@ export default class AuthenticationService {
           const token = jwt.sign(payload, jwtOptions.secretOrKey as jwt.Secret);
           return {
             success: true,
-            message: "User logged in.",
+            message: 'User logged in.',
             token
           };
         } else {
           logger.info('Login failed. wrong password.');
           return {
             success: false,
-            message: "Password did not match."
+            message: 'Password did not match.'
           };
         }
       });
@@ -147,14 +147,14 @@ export default class AuthenticationService {
           if (user) {
             return {
               success: true,
-              message: "Registration completed.",
+              message: 'Registration completed.',
               user
             };
           } else {
             logger.warn('Registration failed.');
             return {
               success: false,
-              message: "Registration failed."
+              message: 'Registration failed.'
             };
           }
         })

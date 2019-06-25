@@ -7,10 +7,10 @@ import {
     BelongsToMany,
     BelongsTo,
     ForeignKey
-} from "sequelize-typescript";
-import User from "./User";
-import User_Role from "./belongsToMany/User_Role";
-import UserGroup from "./UserGroup";
+} from 'sequelize-typescript';
+import User from './User';
+import User_Role from './belongsToMany/User_Role';
+import UserGroup from './UserGroup';
 
 @Table({
   timestamps: true
