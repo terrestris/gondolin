@@ -58,7 +58,7 @@
     "reflect-metadata": "0.1.13",
     "request": "2.88.0",
     "request-promise-native": "1.0.7",
-    "sequelize": "5.8.11",
+    "sequelize": "5.8.12",
     "sequelize-cli": "5.5.0",
     "sequelize-typescript": "1.0.0-beta.3",
     "ts-node": "8.3.0",
