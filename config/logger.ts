@@ -22,15 +22,6 @@ const levels = {
   error: 0
 };
 
-winston.addColors({
-  silly: 'magenta',
-  sequelize: 'magenta',
-  debug: 'cyan',
-  info: 'green',
-  warn: 'yellow',
-  error: 'bold red'
-});
-
 const consoleFormat = format.printf((info) => {
   const timestamp = moment().format('DD.MM.YY hh:mm:ss.SSS');
   return `${timestamp} [${info.level}]: ${info.message}`;
@@ -59,6 +50,16 @@ const logger: winston.Logger = createLogger({
 
 // If we're not in production then log to the `console`
 if (environment !== 'production') {
+
+  winston.addColors({
+    silly: 'bold white',
+    sequelize: 'bold magenta',
+    debug: 'bold cyan',
+    info: 'bold green',
+    warn: 'bold yellow',
+    error: 'bold red'
+  });
+
   logger.add(new transports.Console({
     format: format.combine(
       format.colorize(),
