@@ -109,7 +109,7 @@ module.exports = (app: Application) => {
 
   app.get('/:model/get/:id', (req: Request, res: Response) => {
     const modelName: string = req.params.model;
-    const id: number = req.params.id;
+    const id: number = parseInt(req.params.id, 10);
     const options = optionsFromQueryParams(req.query);
     generic.getEntityById(modelName, id, options)
       .then(data => {
