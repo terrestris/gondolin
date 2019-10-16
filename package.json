@@ -39,7 +39,7 @@
     "@types/node": "^12.7.3",
     "@types/passport-jwt": "^3.0.1",
     "@types/validator": "^10.11.1",
-    "@types/websocket": "^0.0.40",
+    "@types/websocket": "^1.0.0",
     "@types/winston": "^2.4.4",
     "bcrypt-nodejs": "^0.0.3",
     "body-parser": "^1.19.0",
