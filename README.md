@@ -25,7 +25,7 @@ export default 'mellon';
 
 2. Start the database and pgAdmin: `docker-compose --f docker-compose-dev.yml up`.
 
-3. Run `npm install` and then `npm start` and
+3. Run `npm install` and then `npm run start:dev` and
 
 Afterwards…
 
