@@ -65,7 +65,7 @@
     "winston": "^3.2.1"
   },
   "devDependencies": {
-    "np": "^5.2.1"
+    "np": "^6.2.0"
   },
   "engines": {
     "node": ">=10",
