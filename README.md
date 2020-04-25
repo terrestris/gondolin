@@ -1,6 +1,6 @@
 # gondolin
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/terrestris/gondolin.svg)](https://greenkeeper.io/)
+
 
 System requirments:
 
