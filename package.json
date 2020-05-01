@@ -30,7 +30,9 @@
     "release": "np --no-yarn",
     "start": " node --require ts-node/register index.ts",
     "start:dev": "NODE_ENV=development node --require ts-node/register index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "dependencies": {
     "@types/bluebird": "^3.5.29",
@@ -62,7 +64,8 @@
     "ts-node": "^8.5.4",
     "tslint": "^5.20.1",
     "typescript": "^3.7.3",
-    "winston": "^3.2.1"
+    "winston": "^3.2.1",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "np": "^6.2.0"
@@ -70,5 +73,6 @@
   "engines": {
     "node": ">=10",
     "npm": ">=5.6.0"
-  }
+  },
+  "snyk": true
 }
