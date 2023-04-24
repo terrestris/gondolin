@@ -1,5 +1,5 @@
 const environment = process.env.NODE_ENV || 'production';
-const graphqlHTTP = require('express-graphql');
+const graphqlHTTP = require('express-graphql').graphqlHTTP;
 
 // Setup Sequelize
 require('./sequelize.ts');
